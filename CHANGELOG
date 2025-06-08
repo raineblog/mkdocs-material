@@ -1,3 +1,12 @@
+mkdocs-material-9.6.14 (2025-05-13)
+
+  * Fixed #8215: Social plugin crashes when CairoSVG is updated to 2.8
+
+mkdocs-material-9.6.13 (2025-05-10)
+
+  * Fixed #8204: Annotations showing list markers in print view
+  * Fixed #8153: Improve style of cardinality symbols in Mermaid.js ER diagrams
+
 mkdocs-material-9.6.12 (2025-04-17)
 
   * Fixed #8158: Flip footnote back reference icon for right-to-left languages
