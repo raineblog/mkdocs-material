@@ -1,4 +1,4 @@
-/*! `arcade` grammar compiled for Highlight.js 11.10.0 */
+/*! `arcade` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6,7 +6,6 @@
   /*
    Language: ArcGIS Arcade
    Category: scripting
-   Author: John Foster <jfoster@esri.com>
    Website: https://developers.arcgis.com/arcade/
    Description: ArcGIS Arcade is an expression language used in many Esri ArcGIS products such as Pro, Online, Server, Runtime, JavaScript, and Python
   */
@@ -31,6 +30,7 @@
         "import",
         "in",
         "new",
+        "of",
         "return",
         "switch",
         "try",
@@ -101,6 +101,7 @@
         "Disjoint",
         "Distance",
         "DistanceGeodetic",
+        "DistanceToCoordinate",
         "Distinct",
         "Domain",
         "DomainCode",
@@ -112,6 +113,7 @@
         "Expects",
         "Extent",
         "Feature",
+        "FeatureInFilter",
         "FeatureSet",
         "FeatureSetByAssociation",
         "FeatureSetById",
@@ -120,6 +122,7 @@
         "FeatureSetByRelationshipClass",
         "FeatureSetByRelationshipName",
         "Filter",
+        "FilterBySubtypeCode",
         "Find",
         "First|0",
         "Floor",
@@ -154,6 +157,7 @@
         "IsNan",
         "IsSelfIntersecting",
         "IsSimple",
+        "KnowledgeGraphByPortalItem",
         "Left|0",
         "Length",
         "Length3D",
@@ -163,6 +167,7 @@
         "Map",
         "Max",
         "Mean",
+        "MeasureToCoordinate",
         "Mid",
         "Millisecond",
         "Min",
@@ -180,6 +185,7 @@
         "OrderBy",
         "Overlaps",
         "Point",
+        "PointToCoordinate",
         "Polygon",
         "Polyline",
         "Pop",
@@ -187,6 +193,7 @@
         "Pow",
         "Proper",
         "Push",
+        "QueryGraph",
         "Random",
         "Reduce",
         "Relate",
@@ -207,6 +214,7 @@
         "Splice",
         "Split",
         "Sqrt",
+        "StandardizeFilename",
         "StandardizeGuid",
         "Stdev",
         "SubtypeCode",
@@ -269,6 +277,7 @@
       "feedfeature",
       "fencefeature",
       "fencenotificationtype",
+      "graph",
       "join",
       "layer",
       "locationupdate",
@@ -286,7 +295,9 @@
       "targetdatastore",
       "targetfeature",
       "targetlayer",
+      "userInput",
       "value",
+      "variables",
       "view"
     ];
     const SYMBOL = {

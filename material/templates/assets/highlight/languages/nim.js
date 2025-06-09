@@ -1,4 +1,4 @@
-/*! `nim` grammar compiled for Highlight.js 11.10.0 */
+/*! `nim` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -69,9 +69,11 @@
       "break",
       "case",
       "cast",
+      "concept",
       "const",
       "continue",
       "converter",
+      "defer",
       "discard",
       "distinct",
       "div",

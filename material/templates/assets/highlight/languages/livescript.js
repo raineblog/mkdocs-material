@@ -1,4 +1,4 @@
-/*! `livescript` grammar compiled for Highlight.js 11.10.0 */
+/*! `livescript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44,7 +44,9 @@
     "import",
     "from",
     "export",
-    "extends"
+    "extends",
+    // It's reached stage 3, which is "recommended for implementation":
+    "using"
   ];
   const LITERALS = [
     "true",

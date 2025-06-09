@@ -1,4 +1,4 @@
-/*! `makefile` grammar compiled for Highlight.js 11.10.0 */
+/*! `makefile` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -43,7 +43,10 @@
           + 'word wordlist firstword lastword dir notdir suffix basename '
           + 'addsuffix addprefix join wildcard realpath abspath error warning '
           + 'shell origin flavor foreach if or and call eval file value' },
-      contains: [ VARIABLE ]
+      contains: [ 
+        VARIABLE,
+        QUOTE_STRING // Added QUOTE_STRING as they can be a part of functions
+      ]
     };
     /* Variable assignment */
     const ASSIGNMENT = { begin: '^' + hljs.UNDERSCORE_IDENT_RE + '\\s*(?=[:+?]?=)' };

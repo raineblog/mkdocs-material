@@ -1,4 +1,4 @@
-/*! `basic` grammar compiled for Highlight.js 11.10.0 */
+/*! `basic` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -203,7 +203,13 @@
         keyword: KEYWORDS
       },
       contains: [
-        hljs.QUOTE_STRING_MODE,
+        {
+          // Match strings that start with " and end with " or a line break
+          scope: 'string',
+          begin: /"/,
+          end: /"|$/,
+          contains: [ hljs.BACKSLASH_ESCAPE ]
+        },
         hljs.COMMENT('REM', '$', { relevance: 10 }),
         hljs.COMMENT('\'', '$', { relevance: 0 }),
         {

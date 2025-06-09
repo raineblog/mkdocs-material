@@ -1,6 +1,6 @@
 /*!
-  Highlight.js v11.10.0 (git: 366a8bd012)
-  (c) 2006-2024 Josh Goebel <hello@joshgoebel.com> and other contributors
+  Highlight.js v11.11.1 (git: 08cb242e7d)
+  (c) 2006-2025 Josh Goebel <hello@joshgoebel.com> and other contributors
   License: BSD-3-Clause
  */
 var hljs = (function () {
@@ -1558,7 +1558,7 @@ var hljs = (function () {
     return mode;
   }
 
-  var version = "11.10.0";
+  var version = "11.11.1";
 
   class HTMLInjectionError extends Error {
     constructor(reason, html) {
@@ -2085,6 +2085,7 @@ var hljs = (function () {
         // first handler (when ignoreIllegals is true)
         if (match.type === "illegal" && lexeme === "") {
           // advance so we aren't stuck in an infinite loop
+          modeBuffer += "\n";
           return 1;
         }
 
@@ -2378,24 +2379,23 @@ var hljs = (function () {
      * auto-highlights all pre>code elements on the page
      */
     function highlightAll() {
+      function boot() {
+        // if a highlight was requested before DOM was loaded, do now
+        highlightAll();
+      }
+
       // if we are called too early in the loading process
       if (document.readyState === "loading") {
+        // make sure the event listener is only added once
+        if (!wantsHighlight) {
+          window.addEventListener('DOMContentLoaded', boot, false);
+        }
         wantsHighlight = true;
         return;
       }
 
       const blocks = document.querySelectorAll(options.cssSelector);
       blocks.forEach(highlightElement);
-    }
-
-    function boot() {
-      // if a highlight was requested before DOM was loaded, do now
-      if (wantsHighlight) highlightAll();
-    }
-
-    // make sure we are in the browser environment
-    if (typeof window !== 'undefined' && window.addEventListener) {
-      window.addEventListener('DOMContentLoaded', boot, false);
     }
 
     /**
@@ -2604,7 +2604,7 @@ var hljs = (function () {
 
 })();
 if (typeof exports === 'object' && typeof module !== 'undefined') { module.exports = hljs; }
-/*! `1c` grammar compiled for Highlight.js 11.10.0 */
+/*! `1c` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -3157,7 +3157,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('1c', hljsGrammar);
-  })();/*! `abnf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `abnf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -3249,7 +3249,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('abnf', hljsGrammar);
-  })();/*! `accesslog` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `accesslog` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -3350,7 +3350,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('accesslog', hljsGrammar);
-  })();/*! `actionscript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `actionscript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -3512,7 +3512,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('actionscript', hljsGrammar);
-  })();/*! `ada` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ada` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -3786,7 +3786,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ada', hljsGrammar);
-  })();/*! `angelscript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `angelscript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -3973,7 +3973,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('angelscript', hljsGrammar);
-  })();/*! `apache` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `apache` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -4054,6 +4054,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
             keywords: { literal: 'on off all deny allow' },
             contains: [
               {
+                scope: "punctuation",
+                match: /\\\n/
+              },
+              {
                 className: 'meta',
                 begin: /\s\[/,
                 end: /\]$/
@@ -4083,7 +4087,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('apache', hljsGrammar);
-  })();/*! `applescript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `applescript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -4241,7 +4245,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('applescript', hljsGrammar);
-  })();/*! `arcade` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `arcade` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -4249,7 +4253,6 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
   /*
    Language: ArcGIS Arcade
    Category: scripting
-   Author: John Foster <jfoster@esri.com>
    Website: https://developers.arcgis.com/arcade/
    Description: ArcGIS Arcade is an expression language used in many Esri ArcGIS products such as Pro, Online, Server, Runtime, JavaScript, and Python
   */
@@ -4274,6 +4277,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "import",
         "in",
         "new",
+        "of",
         "return",
         "switch",
         "try",
@@ -4344,6 +4348,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "Disjoint",
         "Distance",
         "DistanceGeodetic",
+        "DistanceToCoordinate",
         "Distinct",
         "Domain",
         "DomainCode",
@@ -4355,6 +4360,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "Expects",
         "Extent",
         "Feature",
+        "FeatureInFilter",
         "FeatureSet",
         "FeatureSetByAssociation",
         "FeatureSetById",
@@ -4363,6 +4369,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "FeatureSetByRelationshipClass",
         "FeatureSetByRelationshipName",
         "Filter",
+        "FilterBySubtypeCode",
         "Find",
         "First|0",
         "Floor",
@@ -4397,6 +4404,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "IsNan",
         "IsSelfIntersecting",
         "IsSimple",
+        "KnowledgeGraphByPortalItem",
         "Left|0",
         "Length",
         "Length3D",
@@ -4406,6 +4414,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "Map",
         "Max",
         "Mean",
+        "MeasureToCoordinate",
         "Mid",
         "Millisecond",
         "Min",
@@ -4423,6 +4432,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "OrderBy",
         "Overlaps",
         "Point",
+        "PointToCoordinate",
         "Polygon",
         "Polyline",
         "Pop",
@@ -4430,6 +4440,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "Pow",
         "Proper",
         "Push",
+        "QueryGraph",
         "Random",
         "Reduce",
         "Relate",
@@ -4450,6 +4461,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         "Splice",
         "Split",
         "Sqrt",
+        "StandardizeFilename",
         "StandardizeGuid",
         "Stdev",
         "SubtypeCode",
@@ -4512,6 +4524,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "feedfeature",
       "fencefeature",
       "fencenotificationtype",
+      "graph",
       "join",
       "layer",
       "locationupdate",
@@ -4529,7 +4542,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "targetdatastore",
       "targetfeature",
       "targetlayer",
+      "userInput",
       "value",
+      "variables",
       "view"
     ];
     const SYMBOL = {
@@ -4667,7 +4682,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('arcade', hljsGrammar);
-  })();/*! `arduino` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `arduino` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -4921,6 +4936,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       'counting_semaphore',
       'deque',
       'false_type',
+      'flat_map',
+      'flat_set',
       'future',
       'imaginary',
       'initializer_list',
@@ -5246,7 +5263,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         [
           PREPROCESSOR,
           { // containers: ie, `vector <int> rooms (9);`
-            begin: '\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array|tuple|optional|variant|function)\\s*<(?!<)',
+            begin: '\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array|tuple|optional|variant|function|flat_map|flat_set)\\s*<(?!<)',
             end: '>',
             keywords: CPP_KEYWORDS,
             contains: [
@@ -5682,7 +5699,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('arduino', hljsGrammar);
-  })();/*! `armasm` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `armasm` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -5815,7 +5832,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('armasm', hljsGrammar);
-  })();/*! `asciidoc` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `asciidoc` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6085,7 +6102,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('asciidoc', hljsGrammar);
-  })();/*! `aspectj` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `aspectj` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6325,7 +6342,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('aspectj', hljsGrammar);
-  })();/*! `autohotkey` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `autohotkey` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6409,7 +6426,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('autohotkey', hljsGrammar);
-  })();/*! `autoit` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `autoit` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6596,7 +6613,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('autoit', hljsGrammar);
-  })();/*! `avrasm` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `avrasm` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6683,7 +6700,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('avrasm', hljsGrammar);
-  })();/*! `awk` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `awk` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6760,7 +6777,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('awk', hljsGrammar);
-  })();/*! `axapta` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `axapta` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -6957,7 +6974,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('axapta', hljsGrammar);
-  })();/*! `bash` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `bash` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -7087,6 +7104,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "else",
       "elif",
       "fi",
+      "time",
       "for",
       "while",
       "until",
@@ -7095,6 +7113,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "done",
       "case",
       "esac",
+      "coproc",
       "function",
       "select"
     ];
@@ -7373,7 +7392,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('bash', hljsGrammar);
-  })();/*! `basic` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `basic` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -7578,7 +7597,13 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         keyword: KEYWORDS
       },
       contains: [
-        hljs.QUOTE_STRING_MODE,
+        {
+          // Match strings that start with " and end with " or a line break
+          scope: 'string',
+          begin: /"/,
+          end: /"|$/,
+          contains: [ hljs.BACKSLASH_ESCAPE ]
+        },
         hljs.COMMENT('REM', '$', { relevance: 10 }),
         hljs.COMMENT('\'', '$', { relevance: 0 }),
         {
@@ -7612,7 +7637,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('basic', hljsGrammar);
-  })();/*! `bnf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `bnf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -7660,7 +7685,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('bnf', hljsGrammar);
-  })();/*! `brainfuck` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `brainfuck` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -7723,7 +7748,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('brainfuck', hljsGrammar);
-  })();/*! `c` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `c` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -7787,13 +7812,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const NUMBERS = {
       className: 'number',
       variants: [
-        { begin: '\\b(0b[01\']+)' },
-        { begin: '(-?)\\b([\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)((ll|LL|l|L)(u|U)?|(u|U)(ll|LL|l|L)?|f|F|b|B)' },
-        { begin: '(-?)(\\b0[xX][a-fA-F0-9\']+|(\\b[\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)([eE][-+]?[\\d\']+)?)' }
-      ],
+        { match: /\b(0b[01']+)/ },  
+        { match: /(-?)\b([\d']+(\.[\d']*)?|\.[\d']+)((ll|LL|l|L)(u|U)?|(u|U)(ll|LL|l|L)?|f|F|b|B)/ },  
+        { match: /(-?)\b(0[xX][a-fA-F0-9]+(?:'[a-fA-F0-9]+)*(?:\.[a-fA-F0-9]*(?:'[a-fA-F0-9]*)*)?(?:[pP][-+]?[0-9]+)?(l|L)?(u|U)?)/ },  
+        { match: /(-?)\b\d+(?:'\d+)*(?:\.\d*(?:'\d*)*)?(?:[eE][-+]?\d+)?/ }  
+    ],
       relevance: 0
-    };
-
+    };  
+    
     const PREPROCESSOR = {
       className: 'meta',
       begin: /#\s*[a-z]+\b/,
@@ -8064,7 +8090,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('c', hljsGrammar);
-  })();/*! `cal` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `cal` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8233,7 +8259,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('cal', hljsGrammar);
-  })();/*! `capnproto` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `capnproto` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8341,7 +8367,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('capnproto', hljsGrammar);
-  })();/*! `ceylon` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ceylon` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8490,7 +8516,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ceylon', hljsGrammar);
-  })();/*! `clean` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `clean` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8566,7 +8592,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('clean', hljsGrammar);
-  })();/*! `clojure` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `clojure` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8759,7 +8785,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('clojure', hljsGrammar);
-  })();/*! `clojure-repl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `clojure-repl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8795,7 +8821,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('clojure-repl', hljsGrammar);
-  })();/*! `cmake` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `cmake` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8868,7 +8894,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('cmake', hljsGrammar);
-  })();/*! `coffeescript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `coffeescript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -8914,7 +8940,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     "import",
     "from",
     "export",
-    "extends"
+    "extends",
+    // It's reached stage 3, which is "recommended for implementation":
+    "using"
   ];
   const LITERALS = [
     "true",
@@ -9243,7 +9271,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('coffeescript', hljsGrammar);
-  })();/*! `coq` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `coq` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -9697,7 +9725,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('coq', hljsGrammar);
-  })();/*! `cos` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `cos` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -9846,7 +9874,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('cos', hljsGrammar);
-  })();/*! `cpp` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `cpp` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -10100,6 +10128,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       'counting_semaphore',
       'deque',
       'false_type',
+      'flat_map',
+      'flat_set',
       'future',
       'imaginary',
       'initializer_list',
@@ -10425,7 +10455,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         [
           PREPROCESSOR,
           { // containers: ie, `vector <int> rooms (9);`
-            begin: '\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array|tuple|optional|variant|function)\\s*<(?!<)',
+            begin: '\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array|tuple|optional|variant|function|flat_map|flat_set)\\s*<(?!<)',
             end: '>',
             keywords: CPP_KEYWORDS,
             contains: [
@@ -10458,7 +10488,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('cpp', hljsGrammar);
-  })();/*! `crmsh` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `crmsh` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -10567,7 +10597,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('crmsh', hljsGrammar);
-  })();/*! `crystal` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `crystal` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -10888,7 +10918,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('crystal', hljsGrammar);
-  })();/*! `csharp` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `csharp` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -11012,11 +11042,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       'alias',
       'and',
       'ascending',
+      'args',
       'async',
       'await',
       'by',
       'descending',
+      'dynamic',
       'equals',
+      'file',
       'from',
       'get',
       'global',
@@ -11032,7 +11065,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       'or',
       'orderby',
       'partial',
+      'record',
       'remove',
+      'required',
+      'scoped',
       'select',
       'set',
       'unmanaged',
@@ -11303,7 +11339,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('csharp', hljsGrammar);
-  })();/*! `csp` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `csp` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -11370,7 +11406,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('csp', hljsGrammar);
-  })();/*! `css` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `css` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -11677,7 +11713,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'align-self',
     'alignment-baseline',
     'all',
+    'anchor-name',
     'animation',
+    'animation-composition',
     'animation-delay',
     'animation-direction',
     'animation-duration',
@@ -11685,8 +11723,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'animation-iteration-count',
     'animation-name',
     'animation-play-state',
+    'animation-range',
+    'animation-range-end',
+    'animation-range-start',
+    'animation-timeline',
     'animation-timing-function',
     'appearance',
+    'aspect-ratio',
+    'backdrop-filter',
     'backface-visibility',
     'background',
     'background-attachment',
@@ -11696,6 +11740,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'background-image',
     'background-origin',
     'background-position',
+    'background-position-x',
+    'background-position-y',
     'background-repeat',
     'background-size',
     'baseline-shift',
@@ -11721,6 +11767,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-bottom-width',
     'border-collapse',
     'border-color',
+    'border-end-end-radius',
+    'border-end-start-radius',
     'border-image',
     'border-image-outset',
     'border-image-repeat',
@@ -11745,8 +11793,6 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-left-width',
     'border-radius',
     'border-right',
-    'border-end-end-radius',
-    'border-end-start-radius',
     'border-right-color',
     'border-right-style',
     'border-right-width',
@@ -11762,14 +11808,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-top-width',
     'border-width',
     'bottom',
+    'box-align',
     'box-decoration-break',
+    'box-direction',
+    'box-flex',
+    'box-flex-group',
+    'box-lines',
+    'box-ordinal-group',
+    'box-orient',
+    'box-pack',
     'box-shadow',
     'box-sizing',
     'break-after',
     'break-before',
     'break-inside',
-    'cx',
-    'cy',
     'caption-side',
     'caret-color',
     'clear',
@@ -11793,19 +11845,31 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'column-width',
     'columns',
     'contain',
+    'contain-intrinsic-block-size',
+    'contain-intrinsic-height',
+    'contain-intrinsic-inline-size',
+    'contain-intrinsic-size',
+    'contain-intrinsic-width',
+    'container',
+    'container-name',
+    'container-type',
     'content',
     'content-visibility',
     'counter-increment',
     'counter-reset',
+    'counter-set',
     'cue',
     'cue-after',
     'cue-before',
     'cursor',
+    'cx',
+    'cy',
     'direction',
     'display',
     'dominant-baseline',
     'empty-cells',
     'enable-background',
+    'field-sizing',
     'fill',
     'fill-opacity',
     'fill-rule',
@@ -11818,29 +11882,39 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'flex-shrink',
     'flex-wrap',
     'float',
-    'flow',
     'flood-color',
     'flood-opacity',
+    'flow',
     'font',
     'font-display',
     'font-family',
     'font-feature-settings',
     'font-kerning',
     'font-language-override',
+    'font-optical-sizing',
+    'font-palette',
     'font-size',
     'font-size-adjust',
+    'font-smooth',
     'font-smoothing',
     'font-stretch',
     'font-style',
     'font-synthesis',
+    'font-synthesis-position',
+    'font-synthesis-small-caps',
+    'font-synthesis-style',
+    'font-synthesis-weight',
     'font-variant',
+    'font-variant-alternates',
     'font-variant-caps',
     'font-variant-east-asian',
+    'font-variant-emoji',
     'font-variant-ligatures',
     'font-variant-numeric',
     'font-variant-position',
     'font-variation-settings',
     'font-weight',
+    'forced-color-adjust',
     'gap',
     'glyph-orientation-horizontal',
     'glyph-orientation-vertical',
@@ -11862,14 +11936,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'grid-template-rows',
     'hanging-punctuation',
     'height',
+    'hyphenate-character',
+    'hyphenate-limit-chars',
     'hyphens',
     'icon',
     'image-orientation',
     'image-rendering',
     'image-resolution',
     'ime-mode',
+    'initial-letter',
+    'initial-letter-align',
     'inline-size',
     'inset',
+    'inset-area',
     'inset-block',
     'inset-block-end',
     'inset-block-start',
@@ -11877,24 +11956,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'inset-inline-end',
     'inset-inline-start',
     'isolation',
-    'kerning',
     'justify-content',
     'justify-items',
     'justify-self',
+    'kerning',
     'left',
     'letter-spacing',
     'lighting-color',
     'line-break',
     'line-height',
+    'line-height-step',
     'list-style',
     'list-style-image',
     'list-style-position',
     'list-style-type',
-    'marker',
-    'marker-end',
-    'marker-mid',
-    'marker-start',
-    'mask',
     'margin',
     'margin-block',
     'margin-block-end',
@@ -11906,6 +11981,11 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'margin-left',
     'margin-right',
     'margin-top',
+    'margin-trim',
+    'marker',
+    'marker-end',
+    'marker-mid',
+    'marker-start',
     'marks',
     'mask',
     'mask-border',
@@ -11924,6 +12004,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'mask-repeat',
     'mask-size',
     'mask-type',
+    'masonry-auto-flow',
+    'math-depth',
+    'math-shift',
+    'math-style',
     'max-block-size',
     'max-height',
     'max-inline-size',
@@ -11942,6 +12026,12 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'normal',
     'object-fit',
     'object-position',
+    'offset',
+    'offset-anchor',
+    'offset-distance',
+    'offset-path',
+    'offset-position',
+    'offset-rotate',
     'opacity',
     'order',
     'orphans',
@@ -11951,9 +12041,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'outline-style',
     'outline-width',
     'overflow',
+    'overflow-anchor',
+    'overflow-block',
+    'overflow-clip-margin',
+    'overflow-inline',
     'overflow-wrap',
     'overflow-x',
     'overflow-y',
+    'overlay',
+    'overscroll-behavior',
+    'overscroll-behavior-block',
+    'overscroll-behavior-inline',
+    'overscroll-behavior-x',
+    'overscroll-behavior-y',
     'padding',
     'padding-block',
     'padding-block-end',
@@ -11965,16 +12065,24 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'padding-left',
     'padding-right',
     'padding-top',
+    'page',
     'page-break-after',
     'page-break-before',
     'page-break-inside',
+    'paint-order',
     'pause',
     'pause-after',
     'pause-before',
     'perspective',
     'perspective-origin',
+    'place-content',
+    'place-items',
+    'place-self',
     'pointer-events',
     'position',
+    'position-anchor',
+    'position-visibility',
+    'print-color-adjust',
     'quotes',
     'r',
     'resize',
@@ -11984,7 +12092,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'right',
     'rotate',
     'row-gap',
+    'ruby-align',
+    'ruby-position',
     'scale',
+    'scroll-behavior',
     'scroll-margin',
     'scroll-margin-block',
     'scroll-margin-block-end',
@@ -12010,6 +12121,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'scroll-snap-align',
     'scroll-snap-stop',
     'scroll-snap-type',
+    'scroll-timeline',
+    'scroll-timeline-axis',
+    'scroll-timeline-name',
     'scrollbar-color',
     'scrollbar-gutter',
     'scrollbar-width',
@@ -12017,6 +12131,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'shape-margin',
     'shape-outside',
     'shape-rendering',
+    'speak',
+    'speak-as',
+    'src', // @font-face
     'stop-color',
     'stop-opacity',
     'stroke',
@@ -12027,19 +12144,17 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'stroke-miterlimit',
     'stroke-opacity',
     'stroke-width',
-    'speak',
-    'speak-as',
-    'src', // @font-face
     'tab-size',
     'table-layout',
-    'text-anchor',
     'text-align',
     'text-align-all',
     'text-align-last',
+    'text-anchor',
     'text-combine-upright',
     'text-decoration',
     'text-decoration-color',
     'text-decoration-line',
+    'text-decoration-skip',
     'text-decoration-skip-ink',
     'text-decoration-style',
     'text-decoration-thickness',
@@ -12053,23 +12168,37 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'text-overflow',
     'text-rendering',
     'text-shadow',
+    'text-size-adjust',
     'text-transform',
     'text-underline-offset',
     'text-underline-position',
+    'text-wrap',
+    'text-wrap-mode',
+    'text-wrap-style',
+    'timeline-scope',
     'top',
+    'touch-action',
     'transform',
     'transform-box',
     'transform-origin',
     'transform-style',
     'transition',
+    'transition-behavior',
     'transition-delay',
     'transition-duration',
     'transition-property',
     'transition-timing-function',
     'translate',
     'unicode-bidi',
+    'user-modify',
+    'user-select',
     'vector-effect',
     'vertical-align',
+    'view-timeline',
+    'view-timeline-axis',
+    'view-timeline-inset',
+    'view-timeline-name',
+    'view-transition-name',
     'visibility',
     'voice-balance',
     'voice-duration',
@@ -12080,6 +12209,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'voice-stress',
     'voice-volume',
     'white-space',
+    'white-space-collapse',
     'widows',
     'width',
     'will-change',
@@ -12089,7 +12219,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'writing-mode',
     'x',
     'y',
-    'z-index'
+    'z-index',
+    'zoom'
   ].sort().reverse();
 
   /*
@@ -12233,7 +12364,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('css', hljsGrammar);
-  })();/*! `d` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `d` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -12514,7 +12645,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('d', hljsGrammar);
-  })();/*! `dart` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `dart` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -12544,6 +12675,15 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         }
       ],
       keywords: 'true false null this is new super'
+    };
+
+    const NUMBER = {
+      className: 'number',
+      relevance: 0,
+      variants: [
+        { match: /\b[0-9][0-9_]*(\.[0-9][0-9_]*)?([eE][+-]?[0-9][0-9_]*)?\b/ },
+        { match: /\b0[xX][0-9A-Fa-f][0-9A-Fa-f_]*\b/ }
+      ]
     };
 
     const STRING = {
@@ -12608,7 +12748,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       ]
     };
     BRACED_SUBST.contains = [
-      hljs.C_NUMBER_MODE,
+      NUMBER,
       STRING
     ];
 
@@ -12769,7 +12909,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
             hljs.UNDERSCORE_TITLE_MODE
           ]
         },
-        hljs.C_NUMBER_MODE,
+        NUMBER,
         {
           className: 'meta',
           begin: '@[A-Za-z]+'
@@ -12785,7 +12925,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('dart', hljsGrammar);
-  })();/*! `delphi` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `delphi` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13040,7 +13180,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('delphi', hljsGrammar);
-  })();/*! `diff` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `diff` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13111,7 +13251,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('diff', hljsGrammar);
-  })();/*! `django` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `django` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13195,7 +13335,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('django', hljsGrammar);
-  })();/*! `dns` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `dns` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13282,7 +13422,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('dns', hljsGrammar);
-  })();/*! `dockerfile` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `dockerfile` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13335,7 +13475,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('dockerfile', hljsGrammar);
-  })();/*! `dos` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `dos` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13511,7 +13651,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('dos', hljsGrammar);
-  })();/*! `dsconfig` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `dsconfig` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13586,7 +13726,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('dsconfig', hljsGrammar);
-  })();/*! `dts` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `dts` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13752,7 +13892,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('dts', hljsGrammar);
-  })();/*! `dust` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `dust` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13808,7 +13948,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('dust', hljsGrammar);
-  })();/*! `ebnf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ebnf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -13871,7 +14011,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ebnf', hljsGrammar);
-  })();/*! `elixir` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `elixir` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -14159,7 +14299,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('elixir', hljsGrammar);
-  })();/*! `elm` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `elm` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -14311,7 +14451,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('elm', hljsGrammar);
-  })();/*! `erb` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `erb` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -14349,7 +14489,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('erb', hljsGrammar);
-  })();/*! `erlang` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `erlang` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -14369,7 +14509,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const ERLANG_RESERVED = {
       keyword:
         'after and andalso|10 band begin bnot bor bsl bzr bxor case catch cond div end fun if '
-        + 'let not of orelse|10 query receive rem try when xor',
+        + 'let not of orelse|10 query receive rem try when xor maybe else',
       literal:
         'false true'
     };
@@ -14436,9 +14576,31 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       scope: 'string',
       match: /\$(\\([^0-9]|[0-9]{1,3}|)|.)/,
     };
+    const TRIPLE_QUOTE = {
+      scope: 'string',
+      match: /"""("*)(?!")[\s\S]*?"""\1/,
+    };
+
+    const SIGIL = {
+      scope: 'string',
+      contains: [ hljs.BACKSLASH_ESCAPE ],
+      variants: [
+        {match: /~\w?"""("*)(?!")[\s\S]*?"""\1/},
+        {begin: /~\w?\(/, end: /\)/},
+        {begin: /~\w?\[/, end: /\]/},
+        {begin: /~\w?{/, end: /}/},
+        {begin: /~\w?</, end: />/},
+        {begin: /~\w?\//, end: /\//},
+        {begin: /~\w?\|/, end: /\|/},
+        {begin: /~\w?'/, end: /'/},
+        {begin: /~\w?"/, end: /"/},
+        {begin: /~\w?`/, end: /`/},
+        {begin: /~\w?#/, end: /#/},
+      ],
+    };
 
     const BLOCK_STATEMENTS = {
-      beginKeywords: 'fun receive if try case',
+      beginKeywords: 'fun receive if try case maybe',
       end: 'end',
       keywords: ERLANG_RESERVED
     };
@@ -14448,6 +14610,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       hljs.inherit(hljs.APOS_STRING_MODE, { className: '' }),
       BLOCK_STATEMENTS,
       FUNCTION_CALL,
+      SIGIL,
+      TRIPLE_QUOTE,
       hljs.QUOTE_STRING_MODE,
       NUMBER,
       TUPLE,
@@ -14462,6 +14626,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       NAMED_FUN,
       BLOCK_STATEMENTS,
       FUNCTION_CALL,
+      SIGIL,
+      TRIPLE_QUOTE,
       hljs.QUOTE_STRING_MODE,
       NUMBER,
       TUPLE,
@@ -14484,6 +14650,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "-author",
       "-copyright",
       "-doc",
+      "-moduledoc",
       "-vsn",
       "-import",
       "-include",
@@ -14495,7 +14662,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "-file",
       "-behaviour",
       "-behavior",
-      "-spec"
+      "-spec",
+      "-on_load",
+      "-nifs",
     ];
 
     const PARAMS = {
@@ -14538,9 +14707,16 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
             $pattern: '-' + hljs.IDENT_RE,
             keyword: DIRECTIVES.map(x => `${x}|1.5`).join(" ")
           },
-          contains: [ PARAMS ]
+          contains: [
+            PARAMS,
+            SIGIL,
+            TRIPLE_QUOTE,
+            hljs.QUOTE_STRING_MODE
+          ]
         },
         NUMBER,
+        SIGIL,
+        TRIPLE_QUOTE,
         hljs.QUOTE_STRING_MODE,
         RECORD_ACCESS,
         VAR1,
@@ -14557,7 +14733,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('erlang', hljsGrammar);
-  })();/*! `erlang-repl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `erlang-repl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -14620,7 +14796,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('erlang-repl', hljsGrammar);
-  })();/*! `excel` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `excel` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -14635,7 +14811,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 
   /** @type LanguageFn */
   function excel(hljs) {
-    // built-in functions imported from https://web.archive.org/web/20160513042710/https://support.office.com/en-us/article/Excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188
+    // built-in functions imported from https://web.archive.org/web/20241205190205/https://support.microsoft.com/en-us/office/excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188
     const BUILT_INS = [
       "ABS",
       "ACCRINT",
@@ -14651,6 +14827,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "AND",
       "ARABIC",
       "AREAS",
+      "ARRAYTOTEXT",
       "ASC",
       "ASIN",
       "ASINH",
@@ -14684,6 +14861,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "BITOR",
       "BITRSHIFT",
       "BITXOR",
+      "BYCOL",
+      "BYROW",
       "CALL",
       "CEILING",
       "CEILING.MATH",
@@ -14699,6 +14878,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "CHISQ.INV.RT",
       "CHISQ.TEST",
       "CHOOSE",
+      "CHOOSECOLS",
+      "CHOOSEROWS",
       "CLEAN",
       "CODE",
       "COLUMN",
@@ -14770,6 +14951,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "DOLLARDE",
       "DOLLARFR",
       "DPRODUCT",
+      "DROP",
       "DSTDEV",
       "DSTDEVP",
       "DSUM",
@@ -14789,14 +14971,16 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "EVEN",
       "EXACT",
       "EXP",
+      "EXPAND",
       "EXPON.DIST",
       "EXPONDIST",
       "FACT",
       "FACTDOUBLE",
-      "FALSE|0",
+      "FALSE",
       "F.DIST",
       "FDIST",
       "F.DIST.RT",
+      "FILTER",
       "FILTERXML",
       "FIND",
       "FINDB",
@@ -14840,6 +15024,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "HEX2OCT",
       "HLOOKUP",
       "HOUR",
+      "HSTACK",
       "HYPERLINK",
       "HYPGEOM.DIST",
       "HYPGEOMDIST",
@@ -14848,6 +15033,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "IFNA",
       "IFS",
       "IMABS",
+      "IMAGE",
       "IMAGINARY",
       "IMARGUMENT",
       "IMCONJUGATE",
@@ -14890,6 +15076,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "ISNONTEXT",
       "ISNUMBER",
       "ISODD",
+      "ISOMITTED",
       "ISREF",
       "ISTEXT",
       "ISO.CEILING",
@@ -14897,12 +15084,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "ISPMT",
       "JIS",
       "KURT",
+      "LAMBDA",
       "LARGE",
       "LCM",
       "LEFT",
       "LEFTB",
       "LEN",
       "LENB",
+      "LET",
       "LINEST",
       "LN",
       "LOG",
@@ -14914,6 +15103,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "LOGNORM.INV",
       "LOOKUP",
       "LOWER",
+      "MAKEARRAY",
+      "MAP",
       "MATCH",
       "MAX",
       "MAXA",
@@ -14922,7 +15113,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "MDURATION",
       "MEDIAN",
       "MID",
-      "MIDBs",
+      "MIDB",
       "MIN",
       "MINIFS",
       "MINA",
@@ -14999,12 +15190,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "QUOTIENT",
       "RADIANS",
       "RAND",
+      "RANDARRAY",
       "RANDBETWEEN",
       "RANK.AVG",
       "RANK.EQ",
       "RANK",
       "RATE",
       "RECEIVED",
+      "REDUCE",
       "REGISTER.ID",
       "REPLACE",
       "REPLACEB",
@@ -15020,11 +15213,13 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "RRI",
       "RSQ",
       "RTD",
+      "SCAN",
       "SEARCH",
       "SEARCHB",
       "SEC",
       "SECH",
       "SECOND",
+      "SEQUENCE",
       "SERIESSUM",
       "SHEET",
       "SHEETS",
@@ -15036,10 +15231,13 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "SLN",
       "SLOPE",
       "SMALL",
-      "SQL.REQUEST",
+      "SORT",
+      "SORTBY",
       "SQRT",
       "SQRTPI",
+      "SQL.REQUEST",
       "STANDARDIZE",
+      "STOCKHISTORY",
       "STDEV",
       "STDEV.P",
       "STDEV.S",
@@ -15062,6 +15260,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "T",
       "TAN",
       "TANH",
+      "TAKE",
       "TBILLEQ",
       "TBILLPRICE",
       "TBILLYIELD",
@@ -15070,26 +15269,33 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "T.DIST.RT",
       "TDIST",
       "TEXT",
+      "TEXTAFTER",
+      "TEXTBEFORE",
       "TEXTJOIN",
+      "TEXTSPLIT",
       "TIME",
       "TIMEVALUE",
       "T.INV",
       "T.INV.2T",
       "TINV",
+      "TOCOL",
+      "TOROW",
       "TODAY",
       "TRANSPOSE",
       "TREND",
       "TRIM",
       "TRIMMEAN",
-      "TRUE|0",
+      "TRUE",
       "TRUNC",
       "T.TEST",
       "TTEST",
       "TYPE",
       "UNICHAR",
       "UNICODE",
+      "UNIQUE",
       "UPPER",
       "VALUE",
+      "VALUETOTEXT",
       "VAR",
       "VAR.P",
       "VAR.S",
@@ -15098,6 +15304,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "VARPA",
       "VDB",
       "VLOOKUP",
+      "VSTACK",
       "WEBSERVICE",
       "WEEKDAY",
       "WEEKNUM",
@@ -15105,7 +15312,11 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "WEIBULL.DIST",
       "WORKDAY",
       "WORKDAY.INTL",
+      "WRAPCOLS",
+      "WRAPROWS",
       "XIRR",
+      "XLOOKUP",
+      "XMATCH",
       "XNPV",
       "XOR",
       "YEAR",
@@ -15174,7 +15385,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('excel', hljsGrammar);
-  })();/*! `fix` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `fix` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -15222,7 +15433,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('fix', hljsGrammar);
-  })();/*! `flix` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `flix` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -15310,7 +15521,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('flix', hljsGrammar);
-  })();/*! `fortran` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `fortran` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -15893,7 +16104,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('fortran', hljsGrammar);
-  })();/*! `fsharp` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `fsharp` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -16529,7 +16740,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('fsharp', hljsGrammar);
-  })();/*! `gams` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `gams` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -16719,7 +16930,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('gams', hljsGrammar);
-  })();/*! `gauss` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `gauss` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -17034,7 +17245,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('gauss', hljsGrammar);
-  })();/*! `gcode` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `gcode` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -17048,58 +17259,170 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
    */
 
   function gcode(hljs) {
-    const GCODE_IDENT_RE = '[A-Z_][A-Z0-9_.]*';
-    const GCODE_CLOSE_RE = '%';
+    const regex = hljs.regex;
     const GCODE_KEYWORDS = {
-      $pattern: GCODE_IDENT_RE,
-      keyword: 'IF DO WHILE ENDWHILE CALL ENDIF SUB ENDSUB GOTO REPEAT ENDREPEAT '
-        + 'EQ LT GT NE GE LE OR XOR'
+      $pattern: /[A-Z]+|%/,
+      keyword: [
+        // conditions
+        'THEN',
+        'ELSE',
+        'ENDIF',
+        'IF',
+
+        // controls
+        'GOTO',
+        'DO',
+        'WHILE',
+        'WH',
+        'END',
+        'CALL',
+
+        // scoping
+        'SUB',
+        'ENDSUB',
+
+        // comparisons
+        'EQ',
+        'NE',
+        'LT',
+        'GT',
+        'LE',
+        'GE',
+        'AND',
+        'OR',
+        'XOR',
+
+        // start/end of program
+        '%'
+      ],
+      built_in: [
+        'ATAN',
+        'ABS',
+        'ACOS',
+        'ASIN',
+        'COS',
+        'EXP',
+        'FIX',
+        'FUP',
+        'ROUND',
+        'LN',
+        'SIN',
+        'SQRT',
+        'TAN',
+        'EXISTS'
+      ]
     };
-    const GCODE_START = {
-      className: 'meta',
-      begin: '([O])([0-9]+)'
-    };
-    const NUMBER = hljs.inherit(hljs.C_NUMBER_MODE, { begin: '([-+]?((\\.\\d+)|(\\d+)(\\.\\d*)?))|' + hljs.C_NUMBER_RE });
+
+
+    // TODO: post v12 lets use look-behind, until then \b and a callback filter will be used
+    // const LETTER_BOUNDARY_RE = /(?<![A-Z])/;
+    const LETTER_BOUNDARY_RE = /\b/;
+
+    function LETTER_BOUNDARY_CALLBACK(matchdata, response) {
+      if (matchdata.index === 0) {
+        return;
+      }
+
+      const charBeforeMatch = matchdata.input[matchdata.index - 1];
+      if (charBeforeMatch >= '0' && charBeforeMatch <= '9') {
+        return;
+      }
+
+      if (charBeforeMatch === '_') {
+        return;
+      }
+
+      response.ignoreMatch();
+    }
+
+    const NUMBER_RE = /[+-]?((\.\d+)|(\d+)(\.\d*)?)/;
+
+    const GENERAL_MISC_FUNCTION_RE = /[GM]\s*\d+(\.\d+)?/;
+    const TOOLS_RE = /T\s*\d+/;
+    const SUBROUTINE_RE = /O\s*\d+/;
+    const SUBROUTINE_NAMED_RE = /O<.+>/;
+    const AXES_RE = /[ABCUVWXYZ]\s*/;
+    const PARAMETERS_RE = /[FHIJKPQRS]\s*/;
+
     const GCODE_CODE = [
-      hljs.C_LINE_COMMENT_MODE,
-      hljs.C_BLOCK_COMMENT_MODE,
+      // comments
       hljs.COMMENT(/\(/, /\)/),
-      NUMBER,
-      hljs.inherit(hljs.APOS_STRING_MODE, { illegal: null }),
-      hljs.inherit(hljs.QUOTE_STRING_MODE, { illegal: null }),
+      hljs.COMMENT(/;/, /$/),
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
+      hljs.C_NUMBER_MODE,
+
+      // gcodes
       {
-        className: 'name',
-        begin: '([G])([0-9]+\\.?[0-9]?)'
-      },
-      {
-        className: 'name',
-        begin: '([M])([0-9]+\\.?[0-9]?)'
-      },
-      {
-        className: 'attr',
-        begin: '(VC|VS|#)',
-        end: '(\\d+)'
-      },
-      {
-        className: 'attr',
-        begin: '(VZOFX|VZOFY|VZOFZ)'
-      },
-      {
-        className: 'built_in',
-        begin: '(ATAN|ABS|ACOS|ASIN|SIN|COS|EXP|FIX|FUP|ROUND|LN|TAN)(\\[)',
-        contains: [ NUMBER ],
-        end: '\\]'
-      },
-      {
-        className: 'symbol',
+        scope: 'title.function',
         variants: [
+          // G General functions: G0, G5.1, G5.2, …
+          // M Misc functions: M0, M55.6, M199, …
+          { match: regex.concat(LETTER_BOUNDARY_RE, GENERAL_MISC_FUNCTION_RE) },
           {
-            begin: 'N',
-            end: '\\d+',
-            illegal: '\\W'
+            begin: GENERAL_MISC_FUNCTION_RE,
+            'on:begin': LETTER_BOUNDARY_CALLBACK
+          },
+          // T Tools
+          { match: regex.concat(LETTER_BOUNDARY_RE, TOOLS_RE), },
+          {
+            begin: TOOLS_RE,
+            'on:begin': LETTER_BOUNDARY_CALLBACK
           }
         ]
-      }
+      },
+
+      {
+        scope: 'symbol',
+        variants: [
+          // O Subroutine ID: O100, O110, …
+          { match: regex.concat(LETTER_BOUNDARY_RE, SUBROUTINE_RE) },
+          {
+            begin: SUBROUTINE_RE,
+            'on:begin': LETTER_BOUNDARY_CALLBACK
+          },
+          // O Subroutine name: O<some>, …
+          { match: regex.concat(LETTER_BOUNDARY_RE, SUBROUTINE_NAMED_RE) },
+          {
+            begin: SUBROUTINE_NAMED_RE,
+            'on:begin': LETTER_BOUNDARY_CALLBACK
+          },
+          // Checksum at end of line: *71, *199, …
+          { match: /\*\s*\d+\s*$/ }
+        ]
+      },
+
+      {
+        scope: 'operator', // N Line number: N1, N2, N1020, …
+        match: /^N\s*\d+/
+      },
+
+      {
+        scope: 'variable',
+        match: /-?#\s*\d+/
+      },
+
+      {
+        scope: 'property', // Physical axes,
+        variants: [
+          { match: regex.concat(LETTER_BOUNDARY_RE, AXES_RE, NUMBER_RE) },
+          {
+            begin: regex.concat(AXES_RE, NUMBER_RE),
+            'on:begin': LETTER_BOUNDARY_CALLBACK
+          },
+        ]
+      },
+
+      {
+        scope: 'params', // Different types of parameters
+        variants: [
+          { match: regex.concat(LETTER_BOUNDARY_RE, PARAMETERS_RE, NUMBER_RE) },
+          {
+            begin: regex.concat(PARAMETERS_RE, NUMBER_RE),
+            'on:begin': LETTER_BOUNDARY_CALLBACK
+          },
+        ]
+      },
     ];
 
     return {
@@ -17108,14 +17431,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       // Some implementations (CNC controls) of G-code are interoperable with uppercase and lowercase letters seamlessly.
       // However, most prefer all uppercase and uppercase is customary.
       case_insensitive: true,
+      // TODO: post v12 with the use of look-behind this can be enabled
+      disableAutodetect: true,
       keywords: GCODE_KEYWORDS,
-      contains: [
-        {
-          className: 'meta',
-          begin: GCODE_CLOSE_RE
-        },
-        GCODE_START
-      ].concat(GCODE_CODE)
+      contains: GCODE_CODE
     };
   }
 
@@ -17124,7 +17443,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('gcode', hljsGrammar);
-  })();/*! `gherkin` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `gherkin` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -17182,7 +17501,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('gherkin', hljsGrammar);
-  })();/*! `glsl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `glsl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -17319,7 +17638,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('glsl', hljsGrammar);
-  })();/*! `gml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `gml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -20458,7 +20777,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('gml', hljsGrammar);
-  })();/*! `go` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `go` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -20623,7 +20942,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('go', hljsGrammar);
-  })();/*! `golo` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `golo` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -20713,7 +21032,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('golo', hljsGrammar);
-  })();/*! `gradle` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `gradle` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -20912,7 +21231,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('gradle', hljsGrammar);
-  })();/*! `graphql` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `graphql` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -20999,7 +21318,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('graphql', hljsGrammar);
-  })();/*! `groovy` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `groovy` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -21198,7 +21517,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('groovy', hljsGrammar);
-  })();/*! `haml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `haml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -21320,7 +21639,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('haml', hljsGrammar);
-  })();/*! `handlebars` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `handlebars` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -21587,7 +21906,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('handlebars', hljsGrammar);
-  })();/*! `haskell` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `haskell` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -21813,7 +22132,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('haskell', hljsGrammar);
-  })();/*! `haxe` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `haxe` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -21989,7 +22308,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('haxe', hljsGrammar);
-  })();/*! `hsp` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `hsp` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -22057,7 +22376,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('hsp', hljsGrammar);
-  })();/*! `http` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `http` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -22163,7 +22482,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('http', hljsGrammar);
-  })();/*! `hy` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `hy` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -22309,7 +22628,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('hy', hljsGrammar);
-  })();/*! `inform7` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `inform7` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -22388,7 +22707,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('inform7', hljsGrammar);
-  })();/*! `ini` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ini` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -22518,7 +22837,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ini', hljsGrammar);
-  })();/*! `irpf90` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `irpf90` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -22634,7 +22953,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('irpf90', hljsGrammar);
-  })();/*! `isbl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `isbl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -25848,7 +26167,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('isbl', hljsGrammar);
-  })();/*! `java` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `java` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -25964,7 +26283,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       'sealed',
       'yield',
       'permits',
-      'goto'
+      'goto',
+      'when'
     ];
 
     const BUILT_INS = [
@@ -26147,7 +26467,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('java', hljsGrammar);
-  })();/*! `javascript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `javascript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -26194,7 +26514,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     "import",
     "from",
     "export",
-    "extends"
+    "extends",
+    // It's reached stage 3, which is "recommended for implementation":
+    "using"
   ];
   const LITERALS = [
     "true",
@@ -26576,7 +26898,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const PARAMS = {
       className: 'params',
       // convert this to negative lookbehind in v12
-      begin: /(\s*)\(/, // to match the parms with 
+      begin: /(\s*)\(/, // to match the parms with
       end: /\)/,
       excludeBegin: true,
       excludeEnd: true,
@@ -26787,8 +27109,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         NUMBER,
         CLASS_REFERENCE,
         {
-          className: 'attr',
-          begin: IDENT_RE$1 + regex.lookahead(':'),
+          scope: 'attr',
+          match: IDENT_RE$1 + regex.lookahead(':'),
           relevance: 0
         },
         FUNCTION_VARIABLE,
@@ -26923,7 +27245,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('javascript', hljsGrammar);
-  })();/*! `jboss-cli` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `jboss-cli` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -26995,7 +27317,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('jboss-cli', hljsGrammar);
-  })();/*! `json` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `json` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -27058,7 +27380,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('json', hljsGrammar);
-  })();/*! `julia` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `julia` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -27509,7 +27831,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('julia', hljsGrammar);
-  })();/*! `julia-repl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `julia-repl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -27569,7 +27891,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('julia-repl', hljsGrammar);
-  })();/*! `kotlin` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `kotlin` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -27864,7 +28186,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('kotlin', hljsGrammar);
-  })();/*! `lasso` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `lasso` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -28044,7 +28366,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('lasso', hljsGrammar);
-  })();/*! `latex` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `latex` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -28331,7 +28653,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('latex', hljsGrammar);
-  })();/*! `ldif` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ldif` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -28371,7 +28693,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ldif', hljsGrammar);
-  })();/*! `leaf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `leaf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -28477,7 +28799,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('leaf', hljsGrammar);
-  })();/*! `less` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `less` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -28784,7 +29106,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'align-self',
     'alignment-baseline',
     'all',
+    'anchor-name',
     'animation',
+    'animation-composition',
     'animation-delay',
     'animation-direction',
     'animation-duration',
@@ -28792,8 +29116,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'animation-iteration-count',
     'animation-name',
     'animation-play-state',
+    'animation-range',
+    'animation-range-end',
+    'animation-range-start',
+    'animation-timeline',
     'animation-timing-function',
     'appearance',
+    'aspect-ratio',
+    'backdrop-filter',
     'backface-visibility',
     'background',
     'background-attachment',
@@ -28803,6 +29133,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'background-image',
     'background-origin',
     'background-position',
+    'background-position-x',
+    'background-position-y',
     'background-repeat',
     'background-size',
     'baseline-shift',
@@ -28828,6 +29160,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-bottom-width',
     'border-collapse',
     'border-color',
+    'border-end-end-radius',
+    'border-end-start-radius',
     'border-image',
     'border-image-outset',
     'border-image-repeat',
@@ -28852,8 +29186,6 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-left-width',
     'border-radius',
     'border-right',
-    'border-end-end-radius',
-    'border-end-start-radius',
     'border-right-color',
     'border-right-style',
     'border-right-width',
@@ -28869,14 +29201,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-top-width',
     'border-width',
     'bottom',
+    'box-align',
     'box-decoration-break',
+    'box-direction',
+    'box-flex',
+    'box-flex-group',
+    'box-lines',
+    'box-ordinal-group',
+    'box-orient',
+    'box-pack',
     'box-shadow',
     'box-sizing',
     'break-after',
     'break-before',
     'break-inside',
-    'cx',
-    'cy',
     'caption-side',
     'caret-color',
     'clear',
@@ -28900,19 +29238,31 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'column-width',
     'columns',
     'contain',
+    'contain-intrinsic-block-size',
+    'contain-intrinsic-height',
+    'contain-intrinsic-inline-size',
+    'contain-intrinsic-size',
+    'contain-intrinsic-width',
+    'container',
+    'container-name',
+    'container-type',
     'content',
     'content-visibility',
     'counter-increment',
     'counter-reset',
+    'counter-set',
     'cue',
     'cue-after',
     'cue-before',
     'cursor',
+    'cx',
+    'cy',
     'direction',
     'display',
     'dominant-baseline',
     'empty-cells',
     'enable-background',
+    'field-sizing',
     'fill',
     'fill-opacity',
     'fill-rule',
@@ -28925,29 +29275,39 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'flex-shrink',
     'flex-wrap',
     'float',
-    'flow',
     'flood-color',
     'flood-opacity',
+    'flow',
     'font',
     'font-display',
     'font-family',
     'font-feature-settings',
     'font-kerning',
     'font-language-override',
+    'font-optical-sizing',
+    'font-palette',
     'font-size',
     'font-size-adjust',
+    'font-smooth',
     'font-smoothing',
     'font-stretch',
     'font-style',
     'font-synthesis',
+    'font-synthesis-position',
+    'font-synthesis-small-caps',
+    'font-synthesis-style',
+    'font-synthesis-weight',
     'font-variant',
+    'font-variant-alternates',
     'font-variant-caps',
     'font-variant-east-asian',
+    'font-variant-emoji',
     'font-variant-ligatures',
     'font-variant-numeric',
     'font-variant-position',
     'font-variation-settings',
     'font-weight',
+    'forced-color-adjust',
     'gap',
     'glyph-orientation-horizontal',
     'glyph-orientation-vertical',
@@ -28969,14 +29329,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'grid-template-rows',
     'hanging-punctuation',
     'height',
+    'hyphenate-character',
+    'hyphenate-limit-chars',
     'hyphens',
     'icon',
     'image-orientation',
     'image-rendering',
     'image-resolution',
     'ime-mode',
+    'initial-letter',
+    'initial-letter-align',
     'inline-size',
     'inset',
+    'inset-area',
     'inset-block',
     'inset-block-end',
     'inset-block-start',
@@ -28984,24 +29349,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'inset-inline-end',
     'inset-inline-start',
     'isolation',
-    'kerning',
     'justify-content',
     'justify-items',
     'justify-self',
+    'kerning',
     'left',
     'letter-spacing',
     'lighting-color',
     'line-break',
     'line-height',
+    'line-height-step',
     'list-style',
     'list-style-image',
     'list-style-position',
     'list-style-type',
-    'marker',
-    'marker-end',
-    'marker-mid',
-    'marker-start',
-    'mask',
     'margin',
     'margin-block',
     'margin-block-end',
@@ -29013,6 +29374,11 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'margin-left',
     'margin-right',
     'margin-top',
+    'margin-trim',
+    'marker',
+    'marker-end',
+    'marker-mid',
+    'marker-start',
     'marks',
     'mask',
     'mask-border',
@@ -29031,6 +29397,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'mask-repeat',
     'mask-size',
     'mask-type',
+    'masonry-auto-flow',
+    'math-depth',
+    'math-shift',
+    'math-style',
     'max-block-size',
     'max-height',
     'max-inline-size',
@@ -29049,6 +29419,12 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'normal',
     'object-fit',
     'object-position',
+    'offset',
+    'offset-anchor',
+    'offset-distance',
+    'offset-path',
+    'offset-position',
+    'offset-rotate',
     'opacity',
     'order',
     'orphans',
@@ -29058,9 +29434,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'outline-style',
     'outline-width',
     'overflow',
+    'overflow-anchor',
+    'overflow-block',
+    'overflow-clip-margin',
+    'overflow-inline',
     'overflow-wrap',
     'overflow-x',
     'overflow-y',
+    'overlay',
+    'overscroll-behavior',
+    'overscroll-behavior-block',
+    'overscroll-behavior-inline',
+    'overscroll-behavior-x',
+    'overscroll-behavior-y',
     'padding',
     'padding-block',
     'padding-block-end',
@@ -29072,16 +29458,24 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'padding-left',
     'padding-right',
     'padding-top',
+    'page',
     'page-break-after',
     'page-break-before',
     'page-break-inside',
+    'paint-order',
     'pause',
     'pause-after',
     'pause-before',
     'perspective',
     'perspective-origin',
+    'place-content',
+    'place-items',
+    'place-self',
     'pointer-events',
     'position',
+    'position-anchor',
+    'position-visibility',
+    'print-color-adjust',
     'quotes',
     'r',
     'resize',
@@ -29091,7 +29485,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'right',
     'rotate',
     'row-gap',
+    'ruby-align',
+    'ruby-position',
     'scale',
+    'scroll-behavior',
     'scroll-margin',
     'scroll-margin-block',
     'scroll-margin-block-end',
@@ -29117,6 +29514,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'scroll-snap-align',
     'scroll-snap-stop',
     'scroll-snap-type',
+    'scroll-timeline',
+    'scroll-timeline-axis',
+    'scroll-timeline-name',
     'scrollbar-color',
     'scrollbar-gutter',
     'scrollbar-width',
@@ -29124,6 +29524,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'shape-margin',
     'shape-outside',
     'shape-rendering',
+    'speak',
+    'speak-as',
+    'src', // @font-face
     'stop-color',
     'stop-opacity',
     'stroke',
@@ -29134,19 +29537,17 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'stroke-miterlimit',
     'stroke-opacity',
     'stroke-width',
-    'speak',
-    'speak-as',
-    'src', // @font-face
     'tab-size',
     'table-layout',
-    'text-anchor',
     'text-align',
     'text-align-all',
     'text-align-last',
+    'text-anchor',
     'text-combine-upright',
     'text-decoration',
     'text-decoration-color',
     'text-decoration-line',
+    'text-decoration-skip',
     'text-decoration-skip-ink',
     'text-decoration-style',
     'text-decoration-thickness',
@@ -29160,23 +29561,37 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'text-overflow',
     'text-rendering',
     'text-shadow',
+    'text-size-adjust',
     'text-transform',
     'text-underline-offset',
     'text-underline-position',
+    'text-wrap',
+    'text-wrap-mode',
+    'text-wrap-style',
+    'timeline-scope',
     'top',
+    'touch-action',
     'transform',
     'transform-box',
     'transform-origin',
     'transform-style',
     'transition',
+    'transition-behavior',
     'transition-delay',
     'transition-duration',
     'transition-property',
     'transition-timing-function',
     'translate',
     'unicode-bidi',
+    'user-modify',
+    'user-select',
     'vector-effect',
     'vertical-align',
+    'view-timeline',
+    'view-timeline-axis',
+    'view-timeline-inset',
+    'view-timeline-name',
+    'view-transition-name',
     'visibility',
     'voice-balance',
     'voice-duration',
@@ -29187,6 +29602,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'voice-stress',
     'voice-volume',
     'white-space',
+    'white-space-collapse',
     'widows',
     'width',
     'will-change',
@@ -29196,7 +29612,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'writing-mode',
     'x',
     'y',
-    'z-index'
+    'z-index',
+    'zoom'
   ].sort().reverse();
 
   // some grammars use them all as a single group
@@ -29441,7 +29858,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('less', hljsGrammar);
-  })();/*! `lisp` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `lisp` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -29589,7 +30006,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('lisp', hljsGrammar);
-  })();/*! `livecodeserver` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `livecodeserver` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -29771,7 +30188,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('livecodeserver', hljsGrammar);
-  })();/*! `livescript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `livescript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -29817,7 +30234,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     "import",
     "from",
     "export",
-    "extends"
+    "extends",
+    // It's reached stage 3, which is "recommended for implementation":
+    "using"
   ];
   const LITERALS = [
     "true",
@@ -30158,7 +30577,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('livescript', hljsGrammar);
-  })();/*! `llvm` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `llvm` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -30302,7 +30721,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('llvm', hljsGrammar);
-  })();/*! `lsl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `lsl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -30387,7 +30806,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('lsl', hljsGrammar);
-  })();/*! `lua` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `lua` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -30421,6 +30840,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     ];
     return {
       name: 'Lua',
+      aliases: ['pluto'],
       keywords: {
         $pattern: hljs.UNDERSCORE_IDENT_RE,
         literal: "true false nil",
@@ -30476,7 +30896,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('lua', hljsGrammar);
-  })();/*! `makefile` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `makefile` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -30521,7 +30941,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
           + 'word wordlist firstword lastword dir notdir suffix basename '
           + 'addsuffix addprefix join wildcard realpath abspath error warning '
           + 'shell origin flavor foreach if or and call eval file value' },
-      contains: [ VARIABLE ]
+      contains: [ 
+        VARIABLE,
+        QUOTE_STRING // Added QUOTE_STRING as they can be a part of functions
+      ]
     };
     /* Variable assignment */
     const ASSIGNMENT = { begin: '^' + hljs.UNDERSCORE_IDENT_RE + '\\s*(?=[:+?]?=)' };
@@ -30571,7 +30994,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('makefile', hljsGrammar);
-  })();/*! `markdown` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `markdown` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -30828,7 +31251,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('markdown', hljsGrammar);
-  })();/*! `mathematica` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `mathematica` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -38196,7 +38619,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('mathematica', hljsGrammar);
-  })();/*! `matlab` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `matlab` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -38312,7 +38735,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('matlab', hljsGrammar);
-  })();/*! `maxima` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `maxima` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -38735,7 +39158,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('maxima', hljsGrammar);
-  })();/*! `mel` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `mel` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -38979,7 +39402,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('mel', hljsGrammar);
-  })();/*! `mercury` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `mercury` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -39096,7 +39519,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('mercury', hljsGrammar);
-  })();/*! `mipsasm` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `mipsasm` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -39209,7 +39632,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('mipsasm', hljsGrammar);
-  })();/*! `mizar` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `mizar` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -39245,7 +39668,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('mizar', hljsGrammar);
-  })();/*! `mojolicious` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `mojolicious` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -39290,7 +39713,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('mojolicious', hljsGrammar);
-  })();/*! `monkey` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `monkey` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -39483,7 +39906,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('monkey', hljsGrammar);
-  })();/*! `moonscript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `moonscript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -39633,7 +40056,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('moonscript', hljsGrammar);
-  })();/*! `n1ql` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `n1ql` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -40007,7 +40430,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('n1ql', hljsGrammar);
-  })();/*! `nestedtext` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `nestedtext` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -40099,7 +40522,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('nestedtext', hljsGrammar);
-  })();/*! `nginx` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `nginx` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -40261,7 +40684,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('nginx', hljsGrammar);
-  })();/*! `nim` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `nim` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -40332,9 +40755,11 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "break",
       "case",
       "cast",
+      "concept",
       "const",
       "continue",
       "converter",
+      "defer",
       "discard",
       "distinct",
       "div",
@@ -40455,7 +40880,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('nim', hljsGrammar);
-  })();/*! `nix` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `nix` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -40468,89 +40893,366 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
   Category: system
   */
 
+  /** @type LanguageFn */
   function nix(hljs) {
+    const regex = hljs.regex;
     const KEYWORDS = {
       keyword: [
-        "rec",
-        "with",
-        "let",
+        "assert",
+        "else",
+        "if",
         "in",
         "inherit",
-        "assert",
-        "if",
-        "else",
-        "then"
+        "let",
+        "or",
+        "rec",
+        "then",
+        "with",
       ],
       literal: [
         "true",
         "false",
-        "or",
-        "and",
-        "null"
+        "null",
       ],
       built_in: [
-        "import",
+        // toplevel builtins
         "abort",
         "baseNameOf",
-        "dirOf",
-        "isNull",
         "builtins",
+        "derivation",
+        "derivationStrict",
+        "dirOf",
+        "fetchGit",
+        "fetchMercurial",
+        "fetchTarball",
+        "fetchTree",
+        "fromTOML",
+        "import",
+        "isNull",
         "map",
+        "placeholder",
         "removeAttrs",
+        "scopedImport",
         "throw",
         "toString",
-        "derivation"
-      ]
+      ],
     };
-    const ANTIQUOTE = {
-      className: 'subst',
-      begin: /\$\{/,
-      end: /\}/,
-      keywords: KEYWORDS
+
+    const BUILTINS = {
+      scope: 'built_in',
+      match: regex.either(...[
+        "abort",
+        "add",
+        "addDrvOutputDependencies",
+        "addErrorContext",
+        "all",
+        "any",
+        "appendContext",
+        "attrNames",
+        "attrValues",
+        "baseNameOf",
+        "bitAnd",
+        "bitOr",
+        "bitXor",
+        "break",
+        "builtins",
+        "catAttrs",
+        "ceil",
+        "compareVersions",
+        "concatLists",
+        "concatMap",
+        "concatStringsSep",
+        "convertHash",
+        "currentSystem",
+        "currentTime",
+        "deepSeq",
+        "derivation",
+        "derivationStrict",
+        "dirOf",
+        "div",
+        "elem",
+        "elemAt",
+        "false",
+        "fetchGit",
+        "fetchMercurial",
+        "fetchTarball",
+        "fetchTree",
+        "fetchurl",
+        "filter",
+        "filterSource",
+        "findFile",
+        "flakeRefToString",
+        "floor",
+        "foldl'",
+        "fromJSON",
+        "fromTOML",
+        "functionArgs",
+        "genList",
+        "genericClosure",
+        "getAttr",
+        "getContext",
+        "getEnv",
+        "getFlake",
+        "groupBy",
+        "hasAttr",
+        "hasContext",
+        "hashFile",
+        "hashString",
+        "head",
+        "import",
+        "intersectAttrs",
+        "isAttrs",
+        "isBool",
+        "isFloat",
+        "isFunction",
+        "isInt",
+        "isList",
+        "isNull",
+        "isPath",
+        "isString",
+        "langVersion",
+        "length",
+        "lessThan",
+        "listToAttrs",
+        "map",
+        "mapAttrs",
+        "match",
+        "mul",
+        "nixPath",
+        "nixVersion",
+        "null",
+        "parseDrvName",
+        "parseFlakeRef",
+        "partition",
+        "path",
+        "pathExists",
+        "placeholder",
+        "readDir",
+        "readFile",
+        "readFileType",
+        "removeAttrs",
+        "replaceStrings",
+        "scopedImport",
+        "seq",
+        "sort",
+        "split",
+        "splitVersion",
+        "storeDir",
+        "storePath",
+        "stringLength",
+        "sub",
+        "substring",
+        "tail",
+        "throw",
+        "toFile",
+        "toJSON",
+        "toPath",
+        "toString",
+        "toXML",
+        "trace",
+        "traceVerbose",
+        "true",
+        "tryEval",
+        "typeOf",
+        "unsafeDiscardOutputDependency",
+        "unsafeDiscardStringContext",
+        "unsafeGetAttrPos",
+        "warn",
+        "zipAttrsWith",
+      ].map(b => `builtins\\.${b}`)),
+      relevance: 10,
     };
-    const ESCAPED_DOLLAR = {
-      className: 'char.escape',
-      begin: /''\$/,
+
+    const IDENTIFIER_REGEX = '[A-Za-z_][A-Za-z0-9_\'-]*';
+
+    const LOOKUP_PATH = {
+      scope: 'symbol',
+      match: new RegExp(`<${IDENTIFIER_REGEX}(/${IDENTIFIER_REGEX})*>`),
     };
+
+    const PATH_PIECE = "[A-Za-z0-9_\\+\\.-]+";
+    const PATH = {
+      scope: 'symbol',
+      match: new RegExp(`(\\.\\.|\\.|~)?/(${PATH_PIECE})?(/${PATH_PIECE})*(?=[\\s;])`),
+    };
+
+    const OPERATOR_WITHOUT_MINUS_REGEX = regex.either(...[
+      '==',
+      '=',
+      '\\+\\+',
+      '\\+',
+      '<=',
+      '<\\|',
+      '<',
+      '>=',
+      '>',
+      '->',
+      '//',
+      '/',
+      '!=',
+      '!',
+      '\\|\\|',
+      '\\|>',
+      '\\?',
+      '\\*',
+      '&&',
+    ]);
+
+    const OPERATOR = {
+      scope: 'operator',
+      match: regex.concat(OPERATOR_WITHOUT_MINUS_REGEX, /(?!-)/),
+      relevance: 0,
+    };
+
+    // '-' is being handled by itself to ensure we are able to tell the difference
+    // between a dash in an identifier and a minus operator
+    const NUMBER = {
+      scope: 'number',
+      match: new RegExp(`${hljs.NUMBER_RE}(?!-)`),
+      relevance: 0,
+    };
+    const MINUS_OPERATOR = {
+      variants: [
+        {
+          scope: 'operator',
+          beforeMatch: /\s/,
+          // The (?!>) is used to ensure this doesn't collide with the '->' operator
+          begin: /-(?!>)/,
+        },
+        {
+          begin: [
+            new RegExp(`${hljs.NUMBER_RE}`),
+            /-/,
+            /(?!>)/,
+          ],
+          beginScope: {
+            1: 'number',
+            2: 'operator'
+          },
+        },
+        {
+          begin: [
+            OPERATOR_WITHOUT_MINUS_REGEX,
+            /-/,
+            /(?!>)/,
+          ],
+          beginScope: {
+            1: 'operator',
+            2: 'operator'
+          },
+        },
+      ],
+      relevance: 0,
+    };
+
     const ATTRS = {
-      begin: /[a-zA-Z0-9-_]+(\s*=)/,
+      beforeMatch: /(^|\{|;)\s*/,
+      begin: new RegExp(`${IDENTIFIER_REGEX}(\\.${IDENTIFIER_REGEX})*\\s*=(?!=)`),
       returnBegin: true,
       relevance: 0,
       contains: [
         {
-          className: 'attr',
-          begin: /\S+/,
-          relevance: 0.2
+          scope: 'attr',
+          match: new RegExp(`${IDENTIFIER_REGEX}(\\.${IDENTIFIER_REGEX})*(?=\\s*=)`),
+          relevance: 0.2,
         }
-      ]
+      ],
+    };
+
+    const NORMAL_ESCAPED_DOLLAR = {
+      scope: 'char.escape',
+      match: /\\\$/,
+    };
+    const INDENTED_ESCAPED_DOLLAR = {
+      scope: 'char.escape',
+      match: /''\$/,
+    };
+    const ANTIQUOTE = {
+      scope: 'subst',
+      begin: /\$\{/,
+      end: /\}/,
+      keywords: KEYWORDS,
+    };
+    const ESCAPED_DOUBLEQUOTE = {
+      scope: 'char.escape',
+      match: /'''/,
+    };
+    const ESCAPED_LITERAL = {
+      scope: 'char.escape',
+      match: /\\(?!\$)./,
     };
     const STRING = {
-      className: 'string',
-      contains: [ ESCAPED_DOLLAR, ANTIQUOTE ],
+      scope: 'string',
       variants: [
         {
           begin: "''",
-          end: "''"
+          end: "''",
+          contains: [
+            INDENTED_ESCAPED_DOLLAR,
+            ANTIQUOTE,
+            ESCAPED_DOUBLEQUOTE,
+            ESCAPED_LITERAL,
+          ],
         },
         {
           begin: '"',
-          end: '"'
-        }
-      ]
+          end: '"',
+          contains: [
+            NORMAL_ESCAPED_DOLLAR,
+            ANTIQUOTE,
+            ESCAPED_LITERAL,
+          ],
+        },
+      ],
     };
+
+    const FUNCTION_PARAMS = {
+      scope: 'params',
+      match: new RegExp(`${IDENTIFIER_REGEX}\\s*:(?=\\s)`),
+    };
+
     const EXPRESSIONS = [
-      hljs.NUMBER_MODE,
+      NUMBER,
       hljs.HASH_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE,
+      hljs.COMMENT(
+        /\/\*\*(?!\/)/,
+        /\*\//,
+        {
+          subLanguage: 'markdown',
+          relevance: 0
+        }
+      ),
+      BUILTINS,
       STRING,
-      ATTRS
+      LOOKUP_PATH,
+      PATH,
+      FUNCTION_PARAMS,
+      ATTRS,
+      MINUS_OPERATOR,
+      OPERATOR,
     ];
+
     ANTIQUOTE.contains = EXPRESSIONS;
+
+    const REPL = [
+      {
+        scope: 'meta.prompt',
+        match: /^nix-repl>(?=\s)/,
+        relevance: 10,
+      },
+      {
+        scope: 'meta',
+        beforeMatch: /\s+/,
+        begin: /:([a-z]+|\?)/,
+      },
+    ];
+
     return {
       name: 'Nix',
       aliases: [ "nixos" ],
       keywords: KEYWORDS,
-      contains: EXPRESSIONS
+      contains: EXPRESSIONS.concat(REPL),
     };
   }
 
@@ -40559,7 +41261,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('nix', hljsGrammar);
-  })();/*! `node-repl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `node-repl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -40601,7 +41303,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('node-repl', hljsGrammar);
-  })();/*! `nsis` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `nsis` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -41167,7 +41869,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('nsis', hljsGrammar);
-  })();/*! `objectivec` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `objectivec` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -41429,7 +42131,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('objectivec', hljsGrammar);
-  })();/*! `ocaml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ocaml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -41521,7 +42223,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ocaml', hljsGrammar);
-  })();/*! `openscad` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `openscad` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -41607,7 +42309,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('openscad', hljsGrammar);
-  })();/*! `oxygene` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `oxygene` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -41703,7 +42405,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('oxygene', hljsGrammar);
-  })();/*! `parser3` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `parser3` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -41767,7 +42469,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('parser3', hljsGrammar);
-  })();/*! `perl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `perl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -42280,7 +42982,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('perl', hljsGrammar);
-  })();/*! `pf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `pf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -42349,7 +43051,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('pf', hljsGrammar);
-  })();/*! `pgsql` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `pgsql` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -42883,7 +43585,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('pgsql', hljsGrammar);
-  })();/*! `php` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `php` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -42912,12 +43614,15 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const PASCAL_CASE_CLASS_NAME_RE = regex.concat(
       /(\\?[A-Z][a-z0-9_\x7f-\xff]+|\\?[A-Z]+(?=[A-Z][a-z0-9_\x7f-\xff])){1,}/,
       NOT_PERL_ETC);
+    const UPCASE_NAME_RE = regex.concat(
+      /[A-Z]+/,
+      NOT_PERL_ETC);
     const VARIABLE = {
       scope: 'variable',
       match: '\\$+' + IDENT_RE,
     };
     const PREPROCESSOR = {
-      scope: 'meta',
+      scope: "meta",
       variants: [
         { begin: /<\?php/, relevance: 10 }, // boost for obvious PHP
         { begin: /<\?=/ },
@@ -43331,7 +44036,12 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     ];
 
     const ATTRIBUTES = {
-      begin: regex.concat(/#\[\s*/, PASCAL_CASE_CLASS_NAME_RE),
+      begin: regex.concat(/#\[\s*\\?/,
+        regex.either(
+          PASCAL_CASE_CLASS_NAME_RE,
+          UPCASE_NAME_RE
+        )
+      ),
       beginScope: "meta",
       end: /]/,
       endScope: "meta",
@@ -43361,7 +44071,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         ...ATTRIBUTE_CONTAINS,
         {
           scope: 'meta',
-          match: PASCAL_CASE_CLASS_NAME_RE
+          variants: [
+            { match: PASCAL_CASE_CLASS_NAME_RE },
+            { match: UPCASE_NAME_RE }
+          ]
         }
       ]
     };
@@ -43441,6 +44154,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
               keywords: KEYWORDS,
               contains: [
                 'self',
+                ATTRIBUTES,
                 VARIABLE,
                 LEFT_AND_RIGHT_SIDE_OF_DOUBLE_COLON,
                 hljs.C_BLOCK_COMMENT_MODE,
@@ -43505,7 +44219,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('php', hljsGrammar);
-  })();/*! `php-template` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `php-template` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -43568,7 +44282,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('php-template', hljsGrammar);
-  })();/*! `plaintext` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `plaintext` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -43596,7 +44310,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('plaintext', hljsGrammar);
-  })();/*! `pony` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `pony` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -43695,7 +44409,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('pony', hljsGrammar);
-  })();/*! `powershell` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `powershell` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44021,7 +44735,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('powershell', hljsGrammar);
-  })();/*! `processing` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `processing` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44464,7 +45178,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('processing', hljsGrammar);
-  })();/*! `profile` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `profile` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44516,7 +45230,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('profile', hljsGrammar);
-  })();/*! `prolog` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `prolog` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44622,7 +45336,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('prolog', hljsGrammar);
-  })();/*! `properties` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `properties` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44699,7 +45413,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('properties', hljsGrammar);
-  })();/*! `protobuf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `protobuf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44787,7 +45501,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('protobuf', hljsGrammar);
-  })();/*! `puppet` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `puppet` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -44942,7 +45656,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('puppet', hljsGrammar);
-  })();/*! `purebasic` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `purebasic` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -45051,7 +45765,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('purebasic', hljsGrammar);
-  })();/*! `python` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `python` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -45496,7 +46210,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('python', hljsGrammar);
-  })();/*! `python-repl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `python-repl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -45537,7 +46251,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('python-repl', hljsGrammar);
-  })();/*! `q` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `q` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -45584,7 +46298,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('q', hljsGrammar);
-  })();/*! `qml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `qml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -45782,7 +46496,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('qml', hljsGrammar);
-  })();/*! `r` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `r` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -46048,7 +46762,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('r', hljsGrammar);
-  })();/*! `reasonml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `reasonml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -46199,7 +46913,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('reasonml', hljsGrammar);
-  })();/*! `rib` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `rib` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -46245,7 +46959,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('rib', hljsGrammar);
-  })();/*! `roboconf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `roboconf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -46336,7 +47050,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('roboconf', hljsGrammar);
-  })();/*! `routeros` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `routeros` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -46509,7 +47223,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('routeros', hljsGrammar);
-  })();/*! `rsl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `rsl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -46667,7 +47381,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('rsl', hljsGrammar);
-  })();/*! `ruby` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ruby` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -47024,7 +47738,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       },
       {
         className: 'params',
-        begin: /\|/,
+        begin: /\|(?!=)/,
         end: /\|/,
         excludeBegin: true,
         excludeEnd: true,
@@ -47124,7 +47838,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ruby', hljsGrammar);
-  })();/*! `ruleslanguage` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `ruleslanguage` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -47209,7 +47923,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('ruleslanguage', hljsGrammar);
-  })();/*! `rust` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `rust` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -47415,15 +48129,25 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
           illegal: null
         }),
         {
-          className: 'string',
-          variants: [
-            { begin: /b?r(#*)"(.|\n)*?"\1(?!#)/ },
-            { begin: /b?'\\?(x\w{2}|u\w{4}|U\w{8}|.)'/ }
-          ]
+          className: 'symbol',
+          // negative lookahead to avoid matching `'`
+          begin: /'[a-zA-Z_][a-zA-Z0-9_]*(?!')/
         },
         {
-          className: 'symbol',
-          begin: /'[a-zA-Z_][a-zA-Z0-9_]*/
+          scope: 'string',
+          variants: [
+            { begin: /b?r(#*)"(.|\n)*?"\1(?!#)/ },
+            {
+              begin: /b?'/,
+              end: /'/,
+              contains: [
+                {
+                  scope: "char.escape",
+                  match: /\\('|\w|x\w{2}|u\w{4}|U\w{8})/
+                }
+              ]
+            }
+          ]
         },
         {
           className: 'number',
@@ -47534,7 +48258,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('rust', hljsGrammar);
-  })();/*! `sas` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `sas` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -48100,7 +48824,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('sas', hljsGrammar);
-  })();/*! `scala` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `scala` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -48323,7 +49047,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('scala', hljsGrammar);
-  })();/*! `scheme` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `scheme` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -48528,7 +49252,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('scheme', hljsGrammar);
-  })();/*! `scilab` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `scilab` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -48610,7 +49334,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('scilab', hljsGrammar);
-  })();/*! `scss` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `scss` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -48917,7 +49641,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'align-self',
     'alignment-baseline',
     'all',
+    'anchor-name',
     'animation',
+    'animation-composition',
     'animation-delay',
     'animation-direction',
     'animation-duration',
@@ -48925,8 +49651,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'animation-iteration-count',
     'animation-name',
     'animation-play-state',
+    'animation-range',
+    'animation-range-end',
+    'animation-range-start',
+    'animation-timeline',
     'animation-timing-function',
     'appearance',
+    'aspect-ratio',
+    'backdrop-filter',
     'backface-visibility',
     'background',
     'background-attachment',
@@ -48936,6 +49668,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'background-image',
     'background-origin',
     'background-position',
+    'background-position-x',
+    'background-position-y',
     'background-repeat',
     'background-size',
     'baseline-shift',
@@ -48961,6 +49695,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-bottom-width',
     'border-collapse',
     'border-color',
+    'border-end-end-radius',
+    'border-end-start-radius',
     'border-image',
     'border-image-outset',
     'border-image-repeat',
@@ -48985,8 +49721,6 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-left-width',
     'border-radius',
     'border-right',
-    'border-end-end-radius',
-    'border-end-start-radius',
     'border-right-color',
     'border-right-style',
     'border-right-width',
@@ -49002,14 +49736,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-top-width',
     'border-width',
     'bottom',
+    'box-align',
     'box-decoration-break',
+    'box-direction',
+    'box-flex',
+    'box-flex-group',
+    'box-lines',
+    'box-ordinal-group',
+    'box-orient',
+    'box-pack',
     'box-shadow',
     'box-sizing',
     'break-after',
     'break-before',
     'break-inside',
-    'cx',
-    'cy',
     'caption-side',
     'caret-color',
     'clear',
@@ -49033,19 +49773,31 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'column-width',
     'columns',
     'contain',
+    'contain-intrinsic-block-size',
+    'contain-intrinsic-height',
+    'contain-intrinsic-inline-size',
+    'contain-intrinsic-size',
+    'contain-intrinsic-width',
+    'container',
+    'container-name',
+    'container-type',
     'content',
     'content-visibility',
     'counter-increment',
     'counter-reset',
+    'counter-set',
     'cue',
     'cue-after',
     'cue-before',
     'cursor',
+    'cx',
+    'cy',
     'direction',
     'display',
     'dominant-baseline',
     'empty-cells',
     'enable-background',
+    'field-sizing',
     'fill',
     'fill-opacity',
     'fill-rule',
@@ -49058,29 +49810,39 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'flex-shrink',
     'flex-wrap',
     'float',
-    'flow',
     'flood-color',
     'flood-opacity',
+    'flow',
     'font',
     'font-display',
     'font-family',
     'font-feature-settings',
     'font-kerning',
     'font-language-override',
+    'font-optical-sizing',
+    'font-palette',
     'font-size',
     'font-size-adjust',
+    'font-smooth',
     'font-smoothing',
     'font-stretch',
     'font-style',
     'font-synthesis',
+    'font-synthesis-position',
+    'font-synthesis-small-caps',
+    'font-synthesis-style',
+    'font-synthesis-weight',
     'font-variant',
+    'font-variant-alternates',
     'font-variant-caps',
     'font-variant-east-asian',
+    'font-variant-emoji',
     'font-variant-ligatures',
     'font-variant-numeric',
     'font-variant-position',
     'font-variation-settings',
     'font-weight',
+    'forced-color-adjust',
     'gap',
     'glyph-orientation-horizontal',
     'glyph-orientation-vertical',
@@ -49102,14 +49864,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'grid-template-rows',
     'hanging-punctuation',
     'height',
+    'hyphenate-character',
+    'hyphenate-limit-chars',
     'hyphens',
     'icon',
     'image-orientation',
     'image-rendering',
     'image-resolution',
     'ime-mode',
+    'initial-letter',
+    'initial-letter-align',
     'inline-size',
     'inset',
+    'inset-area',
     'inset-block',
     'inset-block-end',
     'inset-block-start',
@@ -49117,24 +49884,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'inset-inline-end',
     'inset-inline-start',
     'isolation',
-    'kerning',
     'justify-content',
     'justify-items',
     'justify-self',
+    'kerning',
     'left',
     'letter-spacing',
     'lighting-color',
     'line-break',
     'line-height',
+    'line-height-step',
     'list-style',
     'list-style-image',
     'list-style-position',
     'list-style-type',
-    'marker',
-    'marker-end',
-    'marker-mid',
-    'marker-start',
-    'mask',
     'margin',
     'margin-block',
     'margin-block-end',
@@ -49146,6 +49909,11 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'margin-left',
     'margin-right',
     'margin-top',
+    'margin-trim',
+    'marker',
+    'marker-end',
+    'marker-mid',
+    'marker-start',
     'marks',
     'mask',
     'mask-border',
@@ -49164,6 +49932,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'mask-repeat',
     'mask-size',
     'mask-type',
+    'masonry-auto-flow',
+    'math-depth',
+    'math-shift',
+    'math-style',
     'max-block-size',
     'max-height',
     'max-inline-size',
@@ -49182,6 +49954,12 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'normal',
     'object-fit',
     'object-position',
+    'offset',
+    'offset-anchor',
+    'offset-distance',
+    'offset-path',
+    'offset-position',
+    'offset-rotate',
     'opacity',
     'order',
     'orphans',
@@ -49191,9 +49969,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'outline-style',
     'outline-width',
     'overflow',
+    'overflow-anchor',
+    'overflow-block',
+    'overflow-clip-margin',
+    'overflow-inline',
     'overflow-wrap',
     'overflow-x',
     'overflow-y',
+    'overlay',
+    'overscroll-behavior',
+    'overscroll-behavior-block',
+    'overscroll-behavior-inline',
+    'overscroll-behavior-x',
+    'overscroll-behavior-y',
     'padding',
     'padding-block',
     'padding-block-end',
@@ -49205,16 +49993,24 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'padding-left',
     'padding-right',
     'padding-top',
+    'page',
     'page-break-after',
     'page-break-before',
     'page-break-inside',
+    'paint-order',
     'pause',
     'pause-after',
     'pause-before',
     'perspective',
     'perspective-origin',
+    'place-content',
+    'place-items',
+    'place-self',
     'pointer-events',
     'position',
+    'position-anchor',
+    'position-visibility',
+    'print-color-adjust',
     'quotes',
     'r',
     'resize',
@@ -49224,7 +50020,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'right',
     'rotate',
     'row-gap',
+    'ruby-align',
+    'ruby-position',
     'scale',
+    'scroll-behavior',
     'scroll-margin',
     'scroll-margin-block',
     'scroll-margin-block-end',
@@ -49250,6 +50049,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'scroll-snap-align',
     'scroll-snap-stop',
     'scroll-snap-type',
+    'scroll-timeline',
+    'scroll-timeline-axis',
+    'scroll-timeline-name',
     'scrollbar-color',
     'scrollbar-gutter',
     'scrollbar-width',
@@ -49257,6 +50059,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'shape-margin',
     'shape-outside',
     'shape-rendering',
+    'speak',
+    'speak-as',
+    'src', // @font-face
     'stop-color',
     'stop-opacity',
     'stroke',
@@ -49267,19 +50072,17 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'stroke-miterlimit',
     'stroke-opacity',
     'stroke-width',
-    'speak',
-    'speak-as',
-    'src', // @font-face
     'tab-size',
     'table-layout',
-    'text-anchor',
     'text-align',
     'text-align-all',
     'text-align-last',
+    'text-anchor',
     'text-combine-upright',
     'text-decoration',
     'text-decoration-color',
     'text-decoration-line',
+    'text-decoration-skip',
     'text-decoration-skip-ink',
     'text-decoration-style',
     'text-decoration-thickness',
@@ -49293,23 +50096,37 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'text-overflow',
     'text-rendering',
     'text-shadow',
+    'text-size-adjust',
     'text-transform',
     'text-underline-offset',
     'text-underline-position',
+    'text-wrap',
+    'text-wrap-mode',
+    'text-wrap-style',
+    'timeline-scope',
     'top',
+    'touch-action',
     'transform',
     'transform-box',
     'transform-origin',
     'transform-style',
     'transition',
+    'transition-behavior',
     'transition-delay',
     'transition-duration',
     'transition-property',
     'transition-timing-function',
     'translate',
     'unicode-bidi',
+    'user-modify',
+    'user-select',
     'vector-effect',
     'vertical-align',
+    'view-timeline',
+    'view-timeline-axis',
+    'view-timeline-inset',
+    'view-timeline-name',
+    'view-transition-name',
     'visibility',
     'voice-balance',
     'voice-duration',
@@ -49320,6 +50137,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'voice-stress',
     'voice-volume',
     'white-space',
+    'white-space-collapse',
     'widows',
     'width',
     'will-change',
@@ -49329,7 +50147,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'writing-mode',
     'x',
     'y',
-    'z-index'
+    'z-index',
+    'zoom'
   ].sort().reverse();
 
   /*
@@ -49463,7 +50282,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('scss', hljsGrammar);
-  })();/*! `shell` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `shell` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -49505,7 +50324,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('shell', hljsGrammar);
-  })();/*! `smali` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `smali` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -49640,7 +50459,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('smali', hljsGrammar);
-  })();/*! `smalltalk` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `smalltalk` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -49718,7 +50537,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('smalltalk', hljsGrammar);
-  })();/*! `sml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `sml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -49802,7 +50621,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('sml', hljsGrammar);
-  })();/*! `sqf` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `sqf` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -52473,7 +53292,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('sqf', hljsGrammar);
-  })();/*! `sql` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `sql` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -52504,19 +53323,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const regex = hljs.regex;
     const COMMENT_MODE = hljs.COMMENT('--', '$');
     const STRING = {
-      className: 'string',
+      scope: 'string',
       variants: [
         {
           begin: /'/,
           end: /'/,
-          contains: [ { begin: /''/ } ]
+          contains: [ { match: /''/ } ]
         }
       ]
     };
     const QUOTED_IDENTIFIER = {
       begin: /"/,
       end: /"/,
-      contains: [ { begin: /""/ } ]
+      contains: [ { match: /""/ } ]
     };
 
     const LITERALS = [
@@ -53086,20 +53905,40 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     });
 
     const VARIABLE = {
-      className: "variable",
-      begin: /@[a-z0-9][a-z0-9_]*/,
+      scope: "variable",
+      match: /@[a-z0-9][a-z0-9_]*/,
     };
 
     const OPERATOR = {
-      className: "operator",
-      begin: /[-+*/=%^~]|&&?|\|\|?|!=?|<(?:=>?|<|>)?|>[>=]?/,
+      scope: "operator",
+      match: /[-+*/=%^~]|&&?|\|\|?|!=?|<(?:=>?|<|>)?|>[>=]?/,
       relevance: 0,
     };
 
     const FUNCTION_CALL = {
-      begin: regex.concat(/\b/, regex.either(...FUNCTIONS), /\s*\(/),
+      match: regex.concat(/\b/, regex.either(...FUNCTIONS), /\s*\(/),
       relevance: 0,
       keywords: { built_in: FUNCTIONS }
+    };
+
+    // turns a multi-word keyword combo into a regex that doesn't
+    // care about extra whitespace etc.
+    // input: "START QUERY"
+    // output: /\bSTART\s+QUERY\b/
+    function kws_to_regex(list) {
+      return regex.concat(
+        /\b/,
+        regex.either(...list.map((kw) => {
+          return kw.replace(/\s+/, "\\s+")
+        })),
+        /\b/
+      )
+    }
+
+    const MULTI_WORD_KEYWORDS = {
+      scope: "keyword",
+      match: kws_to_regex(COMBOS),
+      relevance: 0,
     };
 
     // keywords with less than 3 letters are reduced in relevancy
@@ -53134,19 +53973,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       },
       contains: [
         {
-          begin: regex.either(...COMBOS),
-          relevance: 0,
-          keywords: {
-            $pattern: /[\w\.]+/,
-            keyword: KEYWORDS.concat(COMBOS),
-            literal: LITERALS,
-            type: TYPES
-          },
+          scope: "type",
+          match: kws_to_regex(MULTI_WORD_TYPES)
         },
-        {
-          className: "type",
-          begin: regex.either(...MULTI_WORD_TYPES)
-        },
+        MULTI_WORD_KEYWORDS,
         FUNCTION_CALL,
         VARIABLE,
         STRING,
@@ -53164,7 +53994,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('sql', hljsGrammar);
-  })();/*! `stan` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `stan` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -53694,7 +54524,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('stan', hljsGrammar);
-  })();/*! `stata` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `stata` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -53756,7 +54586,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('stata', hljsGrammar);
-  })();/*! `step21` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `step21` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -53832,7 +54662,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('step21', hljsGrammar);
-  })();/*! `stylus` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `stylus` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -54139,7 +54969,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'align-self',
     'alignment-baseline',
     'all',
+    'anchor-name',
     'animation',
+    'animation-composition',
     'animation-delay',
     'animation-direction',
     'animation-duration',
@@ -54147,8 +54979,14 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'animation-iteration-count',
     'animation-name',
     'animation-play-state',
+    'animation-range',
+    'animation-range-end',
+    'animation-range-start',
+    'animation-timeline',
     'animation-timing-function',
     'appearance',
+    'aspect-ratio',
+    'backdrop-filter',
     'backface-visibility',
     'background',
     'background-attachment',
@@ -54158,6 +54996,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'background-image',
     'background-origin',
     'background-position',
+    'background-position-x',
+    'background-position-y',
     'background-repeat',
     'background-size',
     'baseline-shift',
@@ -54183,6 +55023,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-bottom-width',
     'border-collapse',
     'border-color',
+    'border-end-end-radius',
+    'border-end-start-radius',
     'border-image',
     'border-image-outset',
     'border-image-repeat',
@@ -54207,8 +55049,6 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-left-width',
     'border-radius',
     'border-right',
-    'border-end-end-radius',
-    'border-end-start-radius',
     'border-right-color',
     'border-right-style',
     'border-right-width',
@@ -54224,14 +55064,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'border-top-width',
     'border-width',
     'bottom',
+    'box-align',
     'box-decoration-break',
+    'box-direction',
+    'box-flex',
+    'box-flex-group',
+    'box-lines',
+    'box-ordinal-group',
+    'box-orient',
+    'box-pack',
     'box-shadow',
     'box-sizing',
     'break-after',
     'break-before',
     'break-inside',
-    'cx',
-    'cy',
     'caption-side',
     'caret-color',
     'clear',
@@ -54255,19 +55101,31 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'column-width',
     'columns',
     'contain',
+    'contain-intrinsic-block-size',
+    'contain-intrinsic-height',
+    'contain-intrinsic-inline-size',
+    'contain-intrinsic-size',
+    'contain-intrinsic-width',
+    'container',
+    'container-name',
+    'container-type',
     'content',
     'content-visibility',
     'counter-increment',
     'counter-reset',
+    'counter-set',
     'cue',
     'cue-after',
     'cue-before',
     'cursor',
+    'cx',
+    'cy',
     'direction',
     'display',
     'dominant-baseline',
     'empty-cells',
     'enable-background',
+    'field-sizing',
     'fill',
     'fill-opacity',
     'fill-rule',
@@ -54280,29 +55138,39 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'flex-shrink',
     'flex-wrap',
     'float',
-    'flow',
     'flood-color',
     'flood-opacity',
+    'flow',
     'font',
     'font-display',
     'font-family',
     'font-feature-settings',
     'font-kerning',
     'font-language-override',
+    'font-optical-sizing',
+    'font-palette',
     'font-size',
     'font-size-adjust',
+    'font-smooth',
     'font-smoothing',
     'font-stretch',
     'font-style',
     'font-synthesis',
+    'font-synthesis-position',
+    'font-synthesis-small-caps',
+    'font-synthesis-style',
+    'font-synthesis-weight',
     'font-variant',
+    'font-variant-alternates',
     'font-variant-caps',
     'font-variant-east-asian',
+    'font-variant-emoji',
     'font-variant-ligatures',
     'font-variant-numeric',
     'font-variant-position',
     'font-variation-settings',
     'font-weight',
+    'forced-color-adjust',
     'gap',
     'glyph-orientation-horizontal',
     'glyph-orientation-vertical',
@@ -54324,14 +55192,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'grid-template-rows',
     'hanging-punctuation',
     'height',
+    'hyphenate-character',
+    'hyphenate-limit-chars',
     'hyphens',
     'icon',
     'image-orientation',
     'image-rendering',
     'image-resolution',
     'ime-mode',
+    'initial-letter',
+    'initial-letter-align',
     'inline-size',
     'inset',
+    'inset-area',
     'inset-block',
     'inset-block-end',
     'inset-block-start',
@@ -54339,24 +55212,20 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'inset-inline-end',
     'inset-inline-start',
     'isolation',
-    'kerning',
     'justify-content',
     'justify-items',
     'justify-self',
+    'kerning',
     'left',
     'letter-spacing',
     'lighting-color',
     'line-break',
     'line-height',
+    'line-height-step',
     'list-style',
     'list-style-image',
     'list-style-position',
     'list-style-type',
-    'marker',
-    'marker-end',
-    'marker-mid',
-    'marker-start',
-    'mask',
     'margin',
     'margin-block',
     'margin-block-end',
@@ -54368,6 +55237,11 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'margin-left',
     'margin-right',
     'margin-top',
+    'margin-trim',
+    'marker',
+    'marker-end',
+    'marker-mid',
+    'marker-start',
     'marks',
     'mask',
     'mask-border',
@@ -54386,6 +55260,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'mask-repeat',
     'mask-size',
     'mask-type',
+    'masonry-auto-flow',
+    'math-depth',
+    'math-shift',
+    'math-style',
     'max-block-size',
     'max-height',
     'max-inline-size',
@@ -54404,6 +55282,12 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'normal',
     'object-fit',
     'object-position',
+    'offset',
+    'offset-anchor',
+    'offset-distance',
+    'offset-path',
+    'offset-position',
+    'offset-rotate',
     'opacity',
     'order',
     'orphans',
@@ -54413,9 +55297,19 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'outline-style',
     'outline-width',
     'overflow',
+    'overflow-anchor',
+    'overflow-block',
+    'overflow-clip-margin',
+    'overflow-inline',
     'overflow-wrap',
     'overflow-x',
     'overflow-y',
+    'overlay',
+    'overscroll-behavior',
+    'overscroll-behavior-block',
+    'overscroll-behavior-inline',
+    'overscroll-behavior-x',
+    'overscroll-behavior-y',
     'padding',
     'padding-block',
     'padding-block-end',
@@ -54427,16 +55321,24 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'padding-left',
     'padding-right',
     'padding-top',
+    'page',
     'page-break-after',
     'page-break-before',
     'page-break-inside',
+    'paint-order',
     'pause',
     'pause-after',
     'pause-before',
     'perspective',
     'perspective-origin',
+    'place-content',
+    'place-items',
+    'place-self',
     'pointer-events',
     'position',
+    'position-anchor',
+    'position-visibility',
+    'print-color-adjust',
     'quotes',
     'r',
     'resize',
@@ -54446,7 +55348,10 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'right',
     'rotate',
     'row-gap',
+    'ruby-align',
+    'ruby-position',
     'scale',
+    'scroll-behavior',
     'scroll-margin',
     'scroll-margin-block',
     'scroll-margin-block-end',
@@ -54472,6 +55377,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'scroll-snap-align',
     'scroll-snap-stop',
     'scroll-snap-type',
+    'scroll-timeline',
+    'scroll-timeline-axis',
+    'scroll-timeline-name',
     'scrollbar-color',
     'scrollbar-gutter',
     'scrollbar-width',
@@ -54479,6 +55387,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'shape-margin',
     'shape-outside',
     'shape-rendering',
+    'speak',
+    'speak-as',
+    'src', // @font-face
     'stop-color',
     'stop-opacity',
     'stroke',
@@ -54489,19 +55400,17 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'stroke-miterlimit',
     'stroke-opacity',
     'stroke-width',
-    'speak',
-    'speak-as',
-    'src', // @font-face
     'tab-size',
     'table-layout',
-    'text-anchor',
     'text-align',
     'text-align-all',
     'text-align-last',
+    'text-anchor',
     'text-combine-upright',
     'text-decoration',
     'text-decoration-color',
     'text-decoration-line',
+    'text-decoration-skip',
     'text-decoration-skip-ink',
     'text-decoration-style',
     'text-decoration-thickness',
@@ -54515,23 +55424,37 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'text-overflow',
     'text-rendering',
     'text-shadow',
+    'text-size-adjust',
     'text-transform',
     'text-underline-offset',
     'text-underline-position',
+    'text-wrap',
+    'text-wrap-mode',
+    'text-wrap-style',
+    'timeline-scope',
     'top',
+    'touch-action',
     'transform',
     'transform-box',
     'transform-origin',
     'transform-style',
     'transition',
+    'transition-behavior',
     'transition-delay',
     'transition-duration',
     'transition-property',
     'transition-timing-function',
     'translate',
     'unicode-bidi',
+    'user-modify',
+    'user-select',
     'vector-effect',
     'vertical-align',
+    'view-timeline',
+    'view-timeline-axis',
+    'view-timeline-inset',
+    'view-timeline-name',
+    'view-transition-name',
     'visibility',
     'voice-balance',
     'voice-duration',
@@ -54542,6 +55465,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'voice-stress',
     'voice-volume',
     'white-space',
+    'white-space-collapse',
     'widows',
     'width',
     'will-change',
@@ -54551,7 +55475,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     'writing-mode',
     'x',
     'y',
-    'z-index'
+    'z-index',
+    'zoom'
   ].sort().reverse();
 
   /*
@@ -54745,7 +55670,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('stylus', hljsGrammar);
-  })();/*! `subunit` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `subunit` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -54798,7 +55723,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('subunit', hljsGrammar);
-  })();/*! `swift` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `swift` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -55658,6 +56583,33 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       end: /}/
     };
 
+    const CLASS_FUNC_DECLARATION = {
+      match: [
+        /class\b/,          
+        /\s+/,
+        /func\b/,
+        /\s+/,
+        /\b[A-Za-z_][A-Za-z0-9_]*\b/ 
+      ],
+      scope: {
+        1: "keyword",
+        3: "keyword",
+        5: "title.function"
+      }
+    };
+
+    const CLASS_VAR_DECLARATION = {
+      match: [
+        /class\b/,
+        /\s+/,          
+        /var\b/, 
+      ],
+      scope: {
+        1: "keyword",
+        3: "keyword"
+      }
+    };
+
     const TYPE_DECLARATION = {
       begin: [
         /(struct|protocol|class|extension|enum|actor)/,
@@ -55722,6 +56674,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         ...COMMENTS,
         FUNCTION_OR_MACRO,
         INIT_SUBSCRIPT,
+        CLASS_FUNC_DECLARATION,
+        CLASS_VAR_DECLARATION,
         TYPE_DECLARATION,
         OPERATOR_DECLARATION,
         PRECEDENCEGROUP,
@@ -55750,7 +56704,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('swift', hljsGrammar);
-  })();/*! `taggerscript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `taggerscript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -55818,7 +56772,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('taggerscript', hljsGrammar);
-  })();/*! `tap` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `tap` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -55874,7 +56828,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('tap', hljsGrammar);
-  })();/*! `tcl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `tcl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -56074,7 +57028,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('tcl', hljsGrammar);
-  })();/*! `thrift` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `thrift` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -56160,7 +57114,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('thrift', hljsGrammar);
-  })();/*! `tp` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `tp` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -56341,7 +57295,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('tp', hljsGrammar);
-  })();/*! `twig` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `twig` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -56610,7 +57564,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('twig', hljsGrammar);
-  })();/*! `typescript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `typescript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -56657,7 +57611,9 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     "import",
     "from",
     "export",
-    "extends"
+    "extends",
+    // It's reached stage 3, which is "recommended for implementation":
+    "using"
   ];
   const LITERALS = [
     "true",
@@ -57039,7 +57995,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const PARAMS = {
       className: 'params',
       // convert this to negative lookbehind in v12
-      begin: /(\s*)\(/, // to match the parms with 
+      begin: /(\s*)\(/, // to match the parms with
       end: /\)/,
       excludeBegin: true,
       excludeEnd: true,
@@ -57250,8 +58206,8 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         NUMBER,
         CLASS_REFERENCE,
         {
-          className: 'attr',
-          begin: IDENT_RE$1 + regex.lookahead(':'),
+          scope: 'attr',
+          match: IDENT_RE$1 + regex.lookahead(':'),
           relevance: 0
         },
         FUNCTION_VARIABLE,
@@ -57393,6 +58349,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 
   /** @type LanguageFn */
   function typescript(hljs) {
+    const regex = hljs.regex;
     const tsLanguage = javascript(hljs);
 
     const IDENT_RE$1 = IDENT_RE;
@@ -57449,13 +58406,11 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       "override",
       "satisfies"
     ];
-
     /*
       namespace is a TS keyword but it's fine to use it as a variable name too.
       const message = 'foo';
       const namespace = 'bar';
     */
-
     const KEYWORDS$1 = {
       $pattern: IDENT_RE,
       keyword: KEYWORDS.concat(TS_SPECIFIC_KEYWORDS),
@@ -57463,6 +58418,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       built_in: BUILT_INS.concat(TYPES),
       "variable.language": BUILT_IN_VARIABLES
     };
+
     const DECORATOR = {
       className: 'meta',
       begin: '@' + IDENT_RE$1,
@@ -57483,15 +58439,25 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     tsLanguage.exports.PARAMS_CONTAINS.push(DECORATOR);
 
     // highlight the function params
-    const ATTRIBUTE_HIGHLIGHT = tsLanguage.contains.find(c => c.className === "attr");
+    const ATTRIBUTE_HIGHLIGHT = tsLanguage.contains.find(c => c.scope === "attr");
+
+    // take default attr rule and extend it to support optionals
+    const OPTIONAL_KEY_OR_ARGUMENT = Object.assign({},
+      ATTRIBUTE_HIGHLIGHT,
+      { match: regex.concat(IDENT_RE$1, regex.lookahead(/\s*\?:/)) }
+    );
     tsLanguage.exports.PARAMS_CONTAINS.push([
       tsLanguage.exports.CLASS_REFERENCE, // class reference for highlighting the params types
       ATTRIBUTE_HIGHLIGHT, // highlight the params key
+      OPTIONAL_KEY_OR_ARGUMENT, // Added for optional property assignment highlighting
     ]);
+
+    // Add the optional property assignment highlighting for objects or classes
     tsLanguage.contains = tsLanguage.contains.concat([
       DECORATOR,
       NAMESPACE,
       INTERFACE,
+      OPTIONAL_KEY_OR_ARGUMENT, // Added for optional property assignment highlighting
     ]);
 
     // TS gets a simpler shebang rule than JS
@@ -57520,7 +58486,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('typescript', hljsGrammar);
-  })();/*! `vala` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `vala` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -57590,7 +58556,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('vala', hljsGrammar);
-  })();/*! `vbnet` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `vbnet` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -57756,7 +58722,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('vbnet', hljsGrammar);
-  })();/*! `vbscript` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `vbscript` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -57985,7 +58951,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('vbscript', hljsGrammar);
-  })();/*! `vbscript-html` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `vbscript-html` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -58018,7 +58984,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('vbscript-html', hljsGrammar);
-  })();/*! `verilog` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `verilog` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -58577,7 +59543,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('verilog', hljsGrammar);
-  })();/*! `vhdl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `vhdl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -58802,7 +59768,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('vhdl', hljsGrammar);
-  })();/*! `vim` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `vim` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -58940,7 +59906,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('vim', hljsGrammar);
-  })();/*! `wasm` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `wasm` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -59088,7 +60054,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('wasm', hljsGrammar);
-  })();/*! `wren` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `wren` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -59399,7 +60365,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('wren', hljsGrammar);
-  })();/*! `x86asm` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `x86asm` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -59561,7 +60527,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('x86asm', hljsGrammar);
-  })();/*! `xl` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `xl` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -59775,7 +60741,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('xl', hljsGrammar);
-  })();/*! `xml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `xml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -60025,7 +60991,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('xml', hljsGrammar);
-  })();/*! `xquery` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `xquery` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -60394,7 +61360,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('xquery', hljsGrammar);
-  })();/*! `yaml` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `yaml` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -60421,15 +61387,15 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const KEY = {
       className: 'attr',
       variants: [
-        // added brackets support 
-        { begin: /\w[\w :()\./-]*:(?=[ \t]|$)/ },
-        { // double quoted keys - with brackets
-          begin: /"\w[\w :()\./-]*":(?=[ \t]|$)/ },
-        { // single quoted keys - with brackets
-          begin: /'\w[\w :()\./-]*':(?=[ \t]|$)/ },
+        // added brackets support and special char support
+        { begin: /[\w*@][\w*@ :()\./-]*:(?=[ \t]|$)/ },
+        { // double quoted keys - with brackets and special char support
+          begin: /"[\w*@][\w*@ :()\./-]*":(?=[ \t]|$)/ },
+        { // single quoted keys - with brackets and special char support
+          begin: /'[\w*@][\w*@ :()\./-]*':(?=[ \t]|$)/ },
       ]
     };
-
+    
     const TEMPLATE_VARIABLES = {
       className: 'template-variable',
       variants: [
@@ -60443,14 +61409,25 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
         }
       ]
     };
+
+    const SINGLE_QUOTE_STRING = {
+      className: 'string',
+      relevance: 0,
+      begin: /'/,
+      end: /'/,
+      contains: [
+        {
+          match: /''/,
+          scope: 'char.escape',
+          relevance: 0
+        }
+      ]
+    };
+
     const STRING = {
       className: 'string',
       relevance: 0,
       variants: [
-        {
-          begin: /'/,
-          end: /'/
-        },
         {
           begin: /"/,
           end: /"/
@@ -60468,7 +61445,13 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
     const CONTAINER_STRING = hljs.inherit(STRING, { variants: [
       {
         begin: /'/,
-        end: /'/
+        end: /'/,
+        contains: [
+          {
+            begin: /''/,
+            relevance: 0
+          }
+        ]
       },
       {
         begin: /"/,
@@ -60577,6 +61560,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
       },
       OBJECT,
       ARRAY,
+      SINGLE_QUOTE_STRING,
       STRING
     ];
 
@@ -60598,7 +61582,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') { module.expor
 })();
 
     hljs.registerLanguage('yaml', hljsGrammar);
-  })();/*! `zephir` grammar compiled for Highlight.js 11.10.0 */
+  })();/*! `zephir` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';

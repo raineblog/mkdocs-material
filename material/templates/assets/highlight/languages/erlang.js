@@ -1,4 +1,4 @@
-/*! `erlang` grammar compiled for Highlight.js 11.10.0 */
+/*! `erlang` grammar compiled for Highlight.js 11.11.1 */
   (function(){
     var hljsGrammar = (function () {
   'use strict';
@@ -18,7 +18,7 @@
     const ERLANG_RESERVED = {
       keyword:
         'after and andalso|10 band begin bnot bor bsl bzr bxor case catch cond div end fun if '
-        + 'let not of orelse|10 query receive rem try when xor',
+        + 'let not of orelse|10 query receive rem try when xor maybe else',
       literal:
         'false true'
     };
@@ -85,9 +85,31 @@
       scope: 'string',
       match: /\$(\\([^0-9]|[0-9]{1,3}|)|.)/,
     };
+    const TRIPLE_QUOTE = {
+      scope: 'string',
+      match: /"""("*)(?!")[\s\S]*?"""\1/,
+    };
+
+    const SIGIL = {
+      scope: 'string',
+      contains: [ hljs.BACKSLASH_ESCAPE ],
+      variants: [
+        {match: /~\w?"""("*)(?!")[\s\S]*?"""\1/},
+        {begin: /~\w?\(/, end: /\)/},
+        {begin: /~\w?\[/, end: /\]/},
+        {begin: /~\w?{/, end: /}/},
+        {begin: /~\w?</, end: />/},
+        {begin: /~\w?\//, end: /\//},
+        {begin: /~\w?\|/, end: /\|/},
+        {begin: /~\w?'/, end: /'/},
+        {begin: /~\w?"/, end: /"/},
+        {begin: /~\w?`/, end: /`/},
+        {begin: /~\w?#/, end: /#/},
+      ],
+    };
 
     const BLOCK_STATEMENTS = {
-      beginKeywords: 'fun receive if try case',
+      beginKeywords: 'fun receive if try case maybe',
       end: 'end',
       keywords: ERLANG_RESERVED
     };
@@ -97,6 +119,8 @@
       hljs.inherit(hljs.APOS_STRING_MODE, { className: '' }),
       BLOCK_STATEMENTS,
       FUNCTION_CALL,
+      SIGIL,
+      TRIPLE_QUOTE,
       hljs.QUOTE_STRING_MODE,
       NUMBER,
       TUPLE,
@@ -111,6 +135,8 @@
       NAMED_FUN,
       BLOCK_STATEMENTS,
       FUNCTION_CALL,
+      SIGIL,
+      TRIPLE_QUOTE,
       hljs.QUOTE_STRING_MODE,
       NUMBER,
       TUPLE,
@@ -133,6 +159,7 @@
       "-author",
       "-copyright",
       "-doc",
+      "-moduledoc",
       "-vsn",
       "-import",
       "-include",
@@ -144,7 +171,9 @@
       "-file",
       "-behaviour",
       "-behavior",
-      "-spec"
+      "-spec",
+      "-on_load",
+      "-nifs",
     ];
 
     const PARAMS = {
@@ -187,9 +216,16 @@
             $pattern: '-' + hljs.IDENT_RE,
             keyword: DIRECTIVES.map(x => `${x}|1.5`).join(" ")
           },
-          contains: [ PARAMS ]
+          contains: [
+            PARAMS,
+            SIGIL,
+            TRIPLE_QUOTE,
+            hljs.QUOTE_STRING_MODE
+          ]
         },
         NUMBER,
+        SIGIL,
+        TRIPLE_QUOTE,
         hljs.QUOTE_STRING_MODE,
         RECORD_ACCESS,
         VAR1,

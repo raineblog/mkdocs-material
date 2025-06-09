@@ -1,4 +1,4 @@
-/*! `apache` grammar compiled for Highlight.js 11.10.0 */
+/*! `apache` grammar compiled for Highlight.js 11.11.1 */
 var hljsGrammar = (function () {
   'use strict';
 
@@ -77,6 +77,10 @@ var hljsGrammar = (function () {
             relevance: 0,
             keywords: { literal: 'on off all deny allow' },
             contains: [
+              {
+                scope: "punctuation",
+                match: /\\\n/
+              },
               {
                 className: 'meta',
                 begin: /\s\[/,

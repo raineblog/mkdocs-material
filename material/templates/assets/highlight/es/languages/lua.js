@@ -1,4 +1,4 @@
-/*! `lua` grammar compiled for Highlight.js 11.10.0 */
+/*! `lua` grammar compiled for Highlight.js 11.11.1 */
 var hljsGrammar = (function () {
   'use strict';
 
@@ -31,6 +31,7 @@ var hljsGrammar = (function () {
     ];
     return {
       name: 'Lua',
+      aliases: ['pluto'],
       keywords: {
         $pattern: hljs.UNDERSCORE_IDENT_RE,
         literal: "true false nil",

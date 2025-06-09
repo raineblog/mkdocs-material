@@ -1,11 +1,10 @@
-/*! `arcade` grammar compiled for Highlight.js 11.10.0 */
+/*! `arcade` grammar compiled for Highlight.js 11.11.1 */
 var hljsGrammar = (function () {
   'use strict';
 
   /*
    Language: ArcGIS Arcade
    Category: scripting
-   Author: John Foster <jfoster@esri.com>
    Website: https://developers.arcgis.com/arcade/
    Description: ArcGIS Arcade is an expression language used in many Esri ArcGIS products such as Pro, Online, Server, Runtime, JavaScript, and Python
   */
@@ -30,6 +29,7 @@ var hljsGrammar = (function () {
         "import",
         "in",
         "new",
+        "of",
         "return",
         "switch",
         "try",
@@ -100,6 +100,7 @@ var hljsGrammar = (function () {
         "Disjoint",
         "Distance",
         "DistanceGeodetic",
+        "DistanceToCoordinate",
         "Distinct",
         "Domain",
         "DomainCode",
@@ -111,6 +112,7 @@ var hljsGrammar = (function () {
         "Expects",
         "Extent",
         "Feature",
+        "FeatureInFilter",
         "FeatureSet",
         "FeatureSetByAssociation",
         "FeatureSetById",
@@ -119,6 +121,7 @@ var hljsGrammar = (function () {
         "FeatureSetByRelationshipClass",
         "FeatureSetByRelationshipName",
         "Filter",
+        "FilterBySubtypeCode",
         "Find",
         "First|0",
         "Floor",
@@ -153,6 +156,7 @@ var hljsGrammar = (function () {
         "IsNan",
         "IsSelfIntersecting",
         "IsSimple",
+        "KnowledgeGraphByPortalItem",
         "Left|0",
         "Length",
         "Length3D",
@@ -162,6 +166,7 @@ var hljsGrammar = (function () {
         "Map",
         "Max",
         "Mean",
+        "MeasureToCoordinate",
         "Mid",
         "Millisecond",
         "Min",
@@ -179,6 +184,7 @@ var hljsGrammar = (function () {
         "OrderBy",
         "Overlaps",
         "Point",
+        "PointToCoordinate",
         "Polygon",
         "Polyline",
         "Pop",
@@ -186,6 +192,7 @@ var hljsGrammar = (function () {
         "Pow",
         "Proper",
         "Push",
+        "QueryGraph",
         "Random",
         "Reduce",
         "Relate",
@@ -206,6 +213,7 @@ var hljsGrammar = (function () {
         "Splice",
         "Split",
         "Sqrt",
+        "StandardizeFilename",
         "StandardizeGuid",
         "Stdev",
         "SubtypeCode",
@@ -268,6 +276,7 @@ var hljsGrammar = (function () {
       "feedfeature",
       "fencefeature",
       "fencenotificationtype",
+      "graph",
       "join",
       "layer",
       "locationupdate",
@@ -285,7 +294,9 @@ var hljsGrammar = (function () {
       "targetdatastore",
       "targetfeature",
       "targetlayer",
+      "userInput",
       "value",
+      "variables",
       "view"
     ];
     const SYMBOL = {

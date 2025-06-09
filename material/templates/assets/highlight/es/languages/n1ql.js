@@ -1,4 +1,4 @@
-/*! `n1ql` grammar compiled for Highlight.js 11.10.0 */
+/*! `n1ql` grammar compiled for Highlight.js 11.11.1 */
 var hljsGrammar = (function () {
   'use strict';
 
