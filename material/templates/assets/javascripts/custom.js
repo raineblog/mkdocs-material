@@ -134,6 +134,7 @@ document$.subscribe(({ body }) => {
             "\\heat": "\\triangle",
             "\\poly": "\\ce{-\\!\\!\\![ #1 ]_n\\!\\!\\!\\!\\!-}",
             "\\el": "#1\\mathrm{#2}^{#3}",
+            "’": "'",
         },
         trust: true,
     });
