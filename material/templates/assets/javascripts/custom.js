@@ -128,6 +128,7 @@ document$.subscribe(({ body }) => {
             "\\floor": "\\left\\lfloor{#1}\\right\\rfloor",
             "\\vert": "\\left\\lvert{#1}\\right\\rvert",
 			"\\vec": "\\bm",
+			"\\vecc": "\\overrightarrow",
             // RainPPR
             "\\thermo": "\\ce{#1};\\quad\\Delta H=\\pu{#2}",
             "\\cat": "\\ce{催化剂}",
