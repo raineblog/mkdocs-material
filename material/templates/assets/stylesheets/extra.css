@@ -1,11 +1,14 @@
-@import url("../fonts/FangZhengXinShuSongJianTi-1/result.css");
+@import url("../fonts/FZXSS-Lusitana-Hybrid/result.css");
+@import url("../fonts/FangZhengXinShuSongFan/result.css");
+@import url("../fonts/ZenOldMincho-Regular/result.css");
+@import url("../fonts/ZenOldMincho-Bold/result.css");
 
 :root {
     --md-code-font: 'Fira Code', 'Source Code Pro', 'Noto Sans SC';
-    --md-text-font: "FZNew ShuSong-Z10S",
-      "Noto Sans SC", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK",
-      "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei",
-      -apple-system, BlinkMacSystemFont, sans-serif;
+    --md-text-font: "FZNewShuSong", "FZNew ShuSongB-Z10",
+      "Zen Old Mincho", "Times New Roman", "Georgia",
+      "Noto Serif SC", "Noto Serif", "Noto Serif CJK SC", "Noto Serif CJK",
+      "Source Han Serif";
 }
 
 .md-typeset table:not([class]) th {
