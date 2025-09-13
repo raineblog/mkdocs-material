@@ -1,8 +1,8 @@
-@import url("../fonts/YEFONTZongYiDanMuTi/result.css");
+@import url("../fonts/FangZhengXinShuSongJianTi-1/result.css");
 
 :root {
     --md-code-font: 'Fira Code', 'Source Code Pro', 'Noto Sans SC';
-    --md-text-font: YEFONTZongYiDanMuTi,
+    --md-text-font: "FZNew ShuSong-Z10S",
       "Noto Sans SC", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK",
       "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei",
       -apple-system, BlinkMacSystemFont, sans-serif;
