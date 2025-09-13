@@ -4,7 +4,7 @@
 @import url("../fonts/ZenOldMincho-Bold/result.css");
 
 :root {
-    --md-code-font: 'Fira Code', 'Source Code Pro', 'Noto Sans', 'Noto Sans CJK SC';
+    --md-code-font: 'Fira Code', 'Source Code Pro', 'Noto Sans', 'Noto Sans SC', 'Noto Sans CJK SC';
     --md-text-font: "FZNewShuSong", "FZNew ShuSongB-Z10", "Zen Old Mincho", "Noto Serif", "Noto Serif CJK SC";
 }
 
