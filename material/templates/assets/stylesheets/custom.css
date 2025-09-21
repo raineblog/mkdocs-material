@@ -152,6 +152,9 @@ mjx-container>img {
     border: 4px solid white;
 }
 
-.md-typeset .grid {
-    grid-template-columns: 1fr 1fr !important;
+
+@media (min-width: 600px) {
+    .md-typeset .grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
 }
