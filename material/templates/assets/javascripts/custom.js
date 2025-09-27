@@ -81,8 +81,8 @@ function m_get_info(site_author) {
 }
 
 document$.subscribe(({ body }) => {
-    hljs.highlightAll();
     console.log("subscribe");
+
     $(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() > 200) { $('#scroll-page-top, #scroll-page-top-new').fadeIn(); }
@@ -94,6 +94,7 @@ document$.subscribe(({ body }) => {
             $(this).animate({ 'opacity': '0.7' }).css({ 'background': '#AAA', 'color': '#FFF' });;
         });
     });
+
     renderMathInElement(body, {
         delimiters: [
             { left: "$$", right: "$$", display: true },
