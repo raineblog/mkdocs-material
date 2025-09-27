@@ -49,3 +49,8 @@ h2, h3 {
         text-align: center;
     }
 }
+
+nowrap {
+    white-space: nowrap;
+    word-break: keep-all;
+}
