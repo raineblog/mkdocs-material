@@ -4,61 +4,11 @@ function do_export() {
 
 function do_not_export() {
     console.log("not export");
+
+    load_giscus();
 }
 
-const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
-
-if (exportParam === 'true') {
-    document$.subscribe(({ body }) => {
-        do_export();
-    });
-}
-else {
-    document$.subscribe(({ body }) => {
-        do_not_export();
-    });
-
-    var giscusScript = document.createElement('script');
-
-    giscusScript.src = "https://giscus.app/client.js";
-    giscusScript.setAttribute("data-repo", "raineblog/blog-giscus");
-    giscusScript.setAttribute("data-repo-id", "R_kgDOMhpKmw");
-    giscusScript.setAttribute("data-category", "Announcements");
-    giscusScript.setAttribute("data-category-id", "DIC_kwDOMhpKm84ChhZ7");
-    giscusScript.setAttribute("data-mapping", "pathname");
-    giscusScript.setAttribute("data-strict", "1");
-    giscusScript.setAttribute("data-reactions-enabled", "1");
-    giscusScript.setAttribute("data-emit-metadata", "0");
-    giscusScript.setAttribute("data-input-position", "top");
-    giscusScript.setAttribute("data-theme", "preferred_color_scheme");
-    giscusScript.setAttribute("data-lang", "zh-CN");
-    giscusScript.setAttribute("data-loading", "lazy");
-    giscusScript.crossOrigin = "anonymous";
-    giscusScript.async = true;
-
-    document.head.appendChild(giscusScript);
-
-    giscusScript.onload = function() {
-        var palette = __md_get("__palette");
-        if (palette && typeof palette.color === "object") {
-            var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
-            giscusScript.setAttribute("data-theme", theme);
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var ref = document.querySelector("[data-md-component=palette]");
-            if (ref) {
-                ref.addEventListener("change", function() {
-                    var palette = __md_get("__palette");
-                    if (palette && typeof palette.color === "object") {
-                        var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
-                        var frame = document.querySelector(".giscus-frame");
-                        if (frame && frame.contentWindow) {
-                            frame.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
-                        }
-                    }
-                });
-            }
-        });
-    };
-}
+document$.subscribe(({ body }) => {
+    const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
+    exportParam === 'true' ? do_not_print() : do_print();
+});
