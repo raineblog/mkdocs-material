@@ -1,5 +1,5 @@
-{% if "giscus" in config %}
-    {% set giscus = config.giscus %}
+{% if "giscus" in config.extra %}
+    {% set giscus = config.extra.giscus %}
     <script>
         function add_giscus() {
             var giscusScript = document.createElement('script');
