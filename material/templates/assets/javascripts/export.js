@@ -3,6 +3,21 @@ function do_export() {
 }
 
 function do_not_export() {
+    console.log("not export");
+}
+
+const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
+
+if (exportParam === 'true') {
+    document$.subscribe(({ body }) => {
+        do_export();
+    });
+}
+else {
+    document$.subscribe(({ body }) => {
+        do_not_export();
+    });
+
     var giscusScript = document.createElement('script');
 
     giscusScript.src = "https://giscus.app/client.js";
@@ -24,36 +39,26 @@ function do_not_export() {
     document.head.appendChild(giscusScript);
 
     giscusScript.onload = function() {
-
-    var palette = __md_get("__palette");
-    if (palette && typeof palette.color === "object") {
-        var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
-        giscusScript.setAttribute("data-theme", theme);
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var ref = document.querySelector("[data-md-component=palette]");
-        if (ref) {
-        ref.addEventListener("change", function() {
-            var palette = __md_get("__palette");
-            if (palette && typeof palette.color === "object") {
+        var palette = __md_get("__palette");
+        if (palette && typeof palette.color === "object") {
             var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
+            giscusScript.setAttribute("data-theme", theme);
+        }
 
-            var frame = document.querySelector(".giscus-frame");
-            if (frame && frame.contentWindow) {
-                frame.contentWindow.postMessage(
-                { giscus: { setConfig: { theme } } },
-                "https://giscus.app"
-                );
-            }
+        document.addEventListener("DOMContentLoaded", function() {
+            var ref = document.querySelector("[data-md-component=palette]");
+            if (ref) {
+                ref.addEventListener("change", function() {
+                    var palette = __md_get("__palette");
+                    if (palette && typeof palette.color === "object") {
+                        var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
+                        var frame = document.querySelector(".giscus-frame");
+                        if (frame && frame.contentWindow) {
+                            frame.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
+                        }
+                    }
+                });
             }
         });
-        }
-    });
     };
 }
-
-document$.subscribe(({ body }) => {
-    const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
-    exportParam === 'true' ? do_export() : do_not_export();
-});
