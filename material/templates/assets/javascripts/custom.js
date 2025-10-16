@@ -1,8 +1,3 @@
-function do_export() {
-    console.log("export");
-}
-
-function do_not_export() {
-    console.log("do not export");
-}
-
+document$.subscribe(({ body }) => {
+    console.log('嗨！你发现了这个小彩蛋！');
+});
