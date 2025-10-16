@@ -1,13 +1,13 @@
-{% if giscus in config %}
+{% if giscus in features %}
     <script>
         function add_giscus() {
             var giscusScript = document.createElement('script');
 
             giscusScript.src = "https://giscus.app/client.js";
-            giscusScript.setAttribute("data-repo", "{{ config.giscus.data_repo }}");
-            giscusScript.setAttribute("data-repo-id", "{{ config.giscus.data_repo_id }}");
+            giscusScript.setAttribute("data-repo", "{{ features.giscus.data_repo }}");
+            giscusScript.setAttribute("data-repo-id", "{{ features.giscus.data_repo_id }}");
             giscusScript.setAttribute("data-category", "Announcements");
-            giscusScript.setAttribute("data-category-id", "{{ config.giscus.data_category_id }}");
+            giscusScript.setAttribute("data-category-id", "{{ features.giscus.data_category_id }}");
             giscusScript.setAttribute("data-mapping", "pathname");
             giscusScript.setAttribute("data-strict", "1");
             giscusScript.setAttribute("data-reactions-enabled", "1");
