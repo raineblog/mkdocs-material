@@ -83,6 +83,10 @@ h2, h3 {
     .md-typeset .grid {
         grid-template-columns: 1fr 1fr !important;
     }
+
+    a {
+        text-decoration: underline !important;
+    }
 }
 
 no-wrap, .no-wrap {
