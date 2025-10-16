@@ -1,14 +1,18 @@
 function do_export() {
-    console.log("export");
+    document$.subscribe(({ body }) => {
+        console.log("export");
+    });
 }
 
-function do_not_export() {
-    console.log("not export");
+const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
 
+if (exportParam === 'true') {
+    do_export();
+}
+else {
     load_giscus();
-}
 
-document$.subscribe(({ body }) => {
-    const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
-    exportParam === 'true' ? do_export() : do_not_export();
-});
+    document$.subscribe(({ body }) => {
+        console.log("not export");
+    });
+}
