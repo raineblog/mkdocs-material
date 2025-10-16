@@ -12,21 +12,19 @@
         giscusScript.setAttribute("data-reactions-enabled", "1");
         giscusScript.setAttribute("data-emit-metadata", "0");
         giscusScript.setAttribute("data-input-position", "top");
-        giscusScript.setAttribute("data-theme", "preferred_color_scheme");
+        // giscusScript.setAttribute("data-theme", "preferred_color_scheme");
         giscusScript.setAttribute("data-lang", "zh-CN");
         giscusScript.setAttribute("data-loading", "lazy");
         giscusScript.crossOrigin = "anonymous";
         giscusScript.async = true;
 
-        document.head.appendChild(giscusScript);
+        var palette = __md_get("__palette");
+        if (palette && typeof palette.color === "object") {
+            var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
+            giscusScript.setAttribute("data-theme", theme);
+        }
 
-        giscusScript.onload = function() {
-            var palette = __md_get("__palette");
-            if (palette && typeof palette.color === "object") {
-                var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
-                giscusScript.setAttribute("data-theme", theme);
-            }
-        };
+        document.head.appendChild(giscusScript);
     }
 
     function load_giscus() {
