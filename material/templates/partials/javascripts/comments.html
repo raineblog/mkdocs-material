@@ -1,5 +1,5 @@
 <script>
-    function load_giscus() {
+    function add_giscus() {
         var giscusScript = document.createElement('script');
 
         giscusScript.src = "https://giscus.app/client.js";
@@ -26,22 +26,23 @@
                 var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
                 giscusScript.setAttribute("data-theme", theme);
             }
-
-            document.addEventListener("DOMContentLoaded", function() {
-                var ref = document.querySelector("[data-md-component=palette]");
-                if (ref) {
-                    ref.addEventListener("change", function() {
-                        var palette = __md_get("__palette");
-                        if (palette && typeof palette.color === "object") {
-                            var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
-                            var frame = document.querySelector(".giscus-frame");
-                            if (frame && frame.contentWindow) {
-                                frame.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
-                            }
-                        }
-                    });
-                }
-            });
         };
+    }
+
+    function load_giscus() {
+        document$.subscribe(({ body }) => {
+            add_giscus();
+        });
+
+        document.querySelector("[data-md-component=palette]").addEventListener("change", function() {
+            var palette = __md_get("__palette");
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate" ? "transparent_dark" : "light";
+                var frame = document.querySelector(".giscus-frame");
+                if (frame && frame.contentWindow) {
+                    frame.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
+                }
+            }
+        });
     }
 </script>
