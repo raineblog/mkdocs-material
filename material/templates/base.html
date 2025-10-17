@@ -56,9 +56,6 @@
         {{ script | script_tag }}
       {% endfor %}
     {% endblock %}
-    {% block fonts %}
-      <link rel="stylesheet" href="https://blog.rainppr.dns-dynamic.net/dist/fonts.mkdocs.css">
-    {% endblock %}
     {% for path in config.extra_css %}
       <link rel="stylesheet" href="{{ path | url }}">
     {% endfor %}
