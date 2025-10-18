@@ -43,7 +43,7 @@ document$.subscribe(({ body }) => {
             "’": "'",
             "\\pH": "p\\ce{H}",
             "\\pOH": "p\\ce{OH}",
-            "\\con": "c(\\ce{#1})",
+            "\\con": "\\left[\\ce{#1}\\right]"
         },
         trust: true,
     });
