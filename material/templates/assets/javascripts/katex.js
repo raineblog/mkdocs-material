@@ -41,8 +41,8 @@ document$.subscribe(({ body }) => {
             "\\poly": "\\ce{-\\!\\!\\![ #1 ]_n\\!\\!\\!\\!\\!-}",
             "\\el": "#1\\mathrm{#2}^{#3}",
             "’": "'",
-			"\pH": "p\ce{H}",
-			"\pOH": "p\ce{OH}"
+            "\\pH": "p\\ce{H}",
+            "\\pOH": "p\\ce{OH}"
         },
         trust: true,
     });
