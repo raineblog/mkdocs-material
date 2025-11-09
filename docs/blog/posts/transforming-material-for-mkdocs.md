@@ -17,11 +17,22 @@ __We are working on an amazing set of features which has required some behind-th
 
 We know it's been quite a while since our last update, which is why we're eager to share what's happening in and around Material for MkDocs with you. For the largest part of 2024, we've been focused on transforming the core of Material for MkDocs preparing the ground for new, interconnected features that are amongst the most frequently requested.
 
-This article is the first in a series where we'll explore how we aim to support our users through improved information retrieval, provide better support for multi-lingual sites and versioning, as well as improve the overall authoring experience. We outline our vision for the projects' evolution and describe what we have been working on. In this and the coming blog posts, we will share our progress with you, and we're excited to hear your thoughts.
+This article is part of a series where we'll explore how we aim to support our users through improved information retrieval, provide better support for multi-lingual sites and versioning, as well as improve the overall authoring experience. We outline our vision for the projects' evolution and describe what we have been working on. In this and the coming blog posts, we will share our progress with you, and we're excited to hear your thoughts.
 
 <!-- more -->
 
 _Please note that this post includes several technical details in the footnotes, specifically on challenges. Feel free to skip them if you're not interested in the specifics._
+
+---
+
+__This is the first article in a four-part series:__
+
+1. Transforming Material for MkDocs
+2. [Zensical – A modern static site generator built by the creators of Material for MkDocs].
+3. What happens to the features in Insiders <small>coming November 11, 2025</small>
+4. A path forward for our community <small>coming November 18, 2025</small>
+
+  [Zensical – A modern static site generator built by the creators of Material for MkDocs]: ./zensical.md
 
 ## A success story
 
@@ -87,7 +98,7 @@ Over the last years, we've invested substantially into [improving the search exp
   [rich search previews]: search-better-faster-smaller.md#rich-search-previews
   [tokenizer lookahead]: search-better-faster-smaller.md#tokenizer-lookahead
   [pipeline functions]: https://lunrjs.com/guides/customising.html#pipeline-functions
-  [unmaintained since 2020]: https://github.com/olivernn/lunr.js/releases/tag/
+  [unmaintained since 2020]: https://github.com/olivernn/lunr.js/tag/
 
 To address these challenges, we've embarked on developing a new search system from first principles that not only matches but already exceeds the capabilities of Lunr.js. Built from the ground up, this system is faster, more compact, and most importantly: modular. It is based on a growing core evolving around two core concepts we isolated to be essential – engines and plugins – allowing for flexible configuration and assembly of components like text indexing, vector embeddings, filtering, ranking, highlighting, and more. Every part of it can be replaced or extended, enabling users to tailor the search system to their specific needs.
 
@@ -184,9 +195,7 @@ These experiences led us to prioritize enhancing our search capabilities before 
 
 While we navigate the challenges and explore the opportunities of this project, we consider it essential to demonstrate how we're building a solid foundation for its continued growth and success. Please consider this an overview rather than a formal roadmap — our detailed plans are in the works. The goals we've highlighted represent the most impactful areas we aim to address.
 
-Thanks to the generous support from our sponsors, we're fortunate to be assembling a team capable of dedicating significant time and expertise to this endeavor. This newfound capacity allows us to delve deeper into core development while also engaging more comprehensively with our user community. A special mention goes to @kamilkrzyskow, one of our invaluable [community experts], who has been essential in supporting users and fostering discussions on our platform.
-
-  [community experts]: ../../insiders/community-experts-program/index.md
+Thanks to the generous support from our sponsors, we're fortunate to be assembling a team capable of dedicating significant time and expertise to this endeavor. This newfound capacity allows us to delve deeper into core development while also engaging more comprehensively with our user community. A special mention goes to @kamilkrzyskow, one of our invaluable community experts, who has been essential in supporting users and fostering discussions on our platform.
 
 With the team's support, @squidfunk can concentrate on the heart of development, while we have begun investing in user research. This effort is helping us understand how organizations and individuals interact with our tools, guiding the project's future direction based on real feedback from numerous conversations with users and companies.
 

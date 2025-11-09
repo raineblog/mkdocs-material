@@ -28,10 +28,6 @@
     src="https://img.shields.io/docker/pulls/squidfunk/mkdocs-material"
     alt="Docker Pulls"
   /></a>
-  <a href="https://github.com/sponsors/squidfunk"><img
-    src="https://img.shields.io/github/sponsors/squidfunk"
-    alt="Sponsors"
-  /></a>
 </p>
 
 <p align="center">
@@ -168,8 +164,8 @@
   <a href="https://invers.com/" target=_blank><img
     src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/sponsor-invers.png" height="58"
   /></a>
-  <a href="https://maxar.com/" target=_blank><img
-    src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/sponsor-maxar.png" height="58"
+  <a href="https://vantor.com/" target=_blank><img
+    src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/sponsor-vantor.png" height="58"
   /></a>
   <a href="https://www.equipmentshare.com/" target=_blank><img
     src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/sponsor-equipmentshare.png" height="58"
