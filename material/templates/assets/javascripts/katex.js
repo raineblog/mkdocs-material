@@ -58,12 +58,13 @@ document$.subscribe(({ body }) => {
             "\\pH": "p\\ce{H}",
             "\\pOH": "p\\ce{OH}",
             "\\con": "\\left[\\ce{#1}\\right]",
-            "\\matrix": "\\begin{matrix}{#1}\\end{matrix}",
-            "\\pmatrix": "\\begin{pmatrix}{#1}\\end{pmatrix}",
-            "\\bmatrix": "\\begin{bmatrix}{#1}\\end{bmatrix}",
-            "\\Bmatrix": "\\begin{Bmatrix}{#1}\\end{Bmatrix}",
-            "\\vmatrix": "\\begin{vmatrix}{#1}\\end{vmatrix}",
-            "\\Vmatrix": "\\begin{Vmatrix}{#1}\\end{Vmatrix}"
+            "\\environment": "\\begin{#1} #2 \\end{#1}",
+            "\\matrix": "\\begin{matrix} #1 \\end{matrix}",
+            "\\pmatrix": "\\begin{pmatrix} #1 \\end{pmatrix}",
+            "\\bmatrix": "\\begin{bmatrix} #1 \\end{bmatrix}",
+            "\\Bmatrix": "\\begin{Bmatrix} #1 \\end{Bmatrix}",
+            "\\vmatrix": "\\begin{vmatrix} #1 \\end{vmatrix}",
+            "\\Vmatrix": "\\begin{Vmatrix} #1 \\end{Vmatrix}"
         },
         trust: true,
     });
