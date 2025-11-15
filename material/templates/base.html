@@ -64,6 +64,7 @@
     {% for path in config.extra_css %}
       <link rel="stylesheet" href="{{ path | url }}">
     {% endfor %}
+    <link rel="stylesheet" href="{{ 'assets/stylesheets/custom.css' | url }}">
     {% include "partials/javascripts/base.html" %}
     {% block analytics %}
       {% include "partials/integrations/analytics.html" %}
@@ -242,6 +243,7 @@
       {% for script in config.extra_javascript %}
         {{ script | script_tag }}
       {% endfor %}
+      <script src="{{ 'assets/javascripts/export.js' | url }}"></script>
     {% endblock %}
   </body>
 </html>
