@@ -95,3 +95,7 @@ no-wrap, .no-wrap {
     text-overflow: ellipsis;
     word-break: keep-all;
 }
+
+.md-typeset .Box-body {
+    overflow: hidden !important;
+}
