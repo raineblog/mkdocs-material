@@ -62,7 +62,7 @@
       {% endfor %}
     {% endblock %}
     {% for path in config.extra_css %}
-      <link rel="stylesheet" href="{{ path | url }}">
+      <link rel="stylesheet" href="{{ path | url }}" media="print" onload="this.media='all'">
     {% endfor %}
     <link rel="stylesheet" href="{{ 'assets/stylesheets/custom.css' | url }}">
     {% include "partials/javascripts/base.html" %}
