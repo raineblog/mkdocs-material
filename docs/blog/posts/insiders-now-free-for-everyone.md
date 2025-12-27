@@ -7,6 +7,7 @@ authors:
   - pawamoy
 categories:
   - General
+icon: material/lock-open
 description: >
   We just released 9.7.0 – the final version of Material for MkDocs, which includes all features that were previously exclusive to sponsors
 title: Insiders – Now free for everyone
@@ -46,11 +47,13 @@ __This is the third article in a four-part series:__
 
 1. [Transforming Material for MkDocs]
 2. [Zensical – A modern static site generator built by the creators of Material for MkDocs]
-3. Material for MkDocs Insiders – Now free for everyone
-4. A path forward for our community <small>coming November 18, 2025</small>
+3. [Material for MkDocs Insiders – Now free for everyone]
+4. [Goodbye, GitHub Discussions]
 
   [Transforming Material for MkDocs]: transforming-material-for-mkdocs.md
   [Zensical – A modern static site generator built by the creators of Material for MkDocs]: zensical.md
+  [Material for MkDocs Insiders – Now free for everyone]: insiders-now-free-for-everyone.md
+  [Goodbye, GitHub Discussions]: goodbye-github-discussions.md
 
 ## Available features
 
@@ -146,7 +149,7 @@ Entering [maintenance mode], we're preparing Material for MkDocs for sunsetting.
 
     We want to be transparent about the risks of staying on Material for MkDocs. With [MkDocs unmaintained] and facing fundamental supply chain concerns, we cannot guarantee Material for MkDocs will continue working reliably in the future. We're aware that transitioning takes time, which is why we commit to support it at least for the next 12 months, fixing critical bugs and security vulnerabilities as needed, but the path forward is with Zensical.
 
-    If documentation plays a critical role in your organization, and you're worried how this might affect your business, consider joining [Zensical Spark](https://zensical.org/spark/), or feel free to schedule a call by reaching out at contact@zensical.org.
+    If documentation plays a critical role in your organization, and you're worried how this might affect your business, consider joining [Zensical Spark](https://zensical.org/spark/), or feel free to schedule a call by reaching out at hello@zensical.org.
 
   [MkDocs unmaintained]: https://github.com/squidfunk/mkdocs-material/discussions/8461
 
@@ -182,10 +185,10 @@ to ensure it evolves to meet the needs of organizations building complex, enterp
 
 [Zensical Spark] is a collaborative space where professional users have a direct voice in shaping Zensical's future. Through a [structured design process] and together with our Zensical Spark members, we identify opportunities, validate proposals, and define priorities – turning their real-world documentation challenges into features that benefit the entire community.
 
-Reach out at contact@zensical.org to schedule a call to learn more about Zensical Spark, discuss your organization's needs, and how it helps us to make Zensical sustainable.
+Reach out at hello@zensical.org to schedule a call to learn more about Zensical Spark, discuss your organization's needs, and how it helps us to make Zensical sustainable.
 
   [Zensical Spark]: https://zensical.org/spark/
-  [structured design process]: https://zensical.org/spark/methodology/#our-approach
+  [structured design process]: https://zensical.org/docs/community/how-we-work/
 
 ### Our commitment to you
 
