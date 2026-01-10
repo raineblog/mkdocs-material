@@ -5,6 +5,9 @@
 <!doctype html>
 <html lang="{{ lang.t('language') }}" class="no-js">
   <head>
+    {% block analytics %}
+      {% include "partials/integrations/analytics.html" %}
+    {% endblock %}
     {% block site_meta %}
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -65,9 +68,6 @@
       <link rel="stylesheet" href="{{ path | url }}">
     {% endfor %}
     {% include "partials/javascripts/base.html" %}
-    {% block analytics %}
-      {% include "partials/integrations/analytics.html" %}
-    {% endblock %}
     {% block extrahead %}{% endblock %}
   </head>
   {% set direction = config.theme.direction or lang.t("direction") %}
