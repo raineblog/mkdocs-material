@@ -242,7 +242,7 @@
       {% for script in config.extra_javascript %}
         {{ script | script_tag }}
       {% endfor %}
-      <script src="{{ 'assets/javascripts/export.min.js' | url }}"></script>
+      <script src="{{ 'assets/javascripts/export.js' | url }}"></script>
     {% endblock %}
   </body>
 </html>
