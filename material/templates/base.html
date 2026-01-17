@@ -64,6 +64,9 @@
         {{ script | script_tag }}
       {% endfor %}
     {% endblock %}
+    {% block fonts %}
+      {% include "partials/integrations/fonts.html" %}
+    {% endblock %}
     <link rel="stylesheet" href="{{ 'assets/stylesheets/custom.css' | url }}">
     {% for path in config.extra_css %}
       <link rel="stylesheet" href="{{ path | url }}">
