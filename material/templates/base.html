@@ -65,7 +65,8 @@
       {% endfor %}
     {% endblock %}
     {% block fonts %}
-      {% include "partials/integrations/fonts.html" %}
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/fonts.min.css">
     {% endblock %}
     <link rel="stylesheet" href="{{ 'assets/stylesheets/custom.css' | url }}">
     {% for path in config.extra_css %}

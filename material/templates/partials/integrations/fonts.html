@@ -1,8 +1,0 @@
-{#-
-  This file was automatically generated - do not edit
--#}
-
-{% for fontiver in config.extra.fonts %}
-  {% set config = fontiver.config %}
-  {% include "partials/integrations/fonts/" ~ fontiver.provider ~ ".html" %}
-{% endfor %}
