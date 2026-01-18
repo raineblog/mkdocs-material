@@ -2,58 +2,9 @@
   This file was automatically generated - do not edit
 -#}
 
-{# 1. 定义资源配置：可以在这里方便地增删改 CDN #}
-{% set fontkit_package = "/@raineblog/mkdocs-fontkit@latest/dist/fonts.min.css" %}
-{% set cdn_mirrors = [
-    {"domain": "https://cdn.jsdelivr.net", "prefix": "/npm"},
-    {"domain": "https://unpkg.com", "prefix": ""},
-    {"domain": "https://esm.sh", "prefix": ""},
-    {"domain": "https://cdn.skypack.dev", "prefix": ""}
-] %}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://unpkg.com">
 
-{# 2. 自动生成 Preconnect 标签 (加速 DNS 和 TCP 握手) #}
-{% for mirror in cdn_mirrors %}
-<link rel="preconnect" href="{{ mirror.domain }}" crossorigin>
-{% endfor %}
-
-{# 3. JS 并发竞速逻辑 #}
-<script>
-(function() {
-    // 由 Jinja2 自动生成的 URL 列表
-    const urls = [
-        {% for mirror in cdn_mirrors %}
-        "{{ mirror.domain }}{{ mirror.prefix }}{{ fontkit_package }}",
-        {% endfor %}
-    ];
-
-    // 定义获取资源的函数
-    const fetchCss = (url) => {
-        // mode: 'cors' 确保可以跨域读取内容
-        return fetch(url, { mode: 'cors', priority: 'high' })
-            .then(res => {
-                if (!res.ok) throw new Error(url);
-                return res.text();
-            });
-    };
-
-    // Promise.any: 只要有一个成功，就立即完成，忽略其他的
-    // 如果浏览器不支持 Promise.any (极少数旧浏览器)，可以在这里加 Polyfill 或 fallback
-    if (window.Promise && window.Promise.any) {
-        Promise.any(urls.map(fetchCss))
-            .then(cssContent => {
-                const style = document.createElement('style');
-                style.id = 'mkdocs-fontkit-racing'; // 方便调试或覆盖
-                style.textContent = cssContent;
-                document.head.appendChild(style);
-                console.debug('[FontKit] Loaded from fastest CDN.');
-            })
-            .catch(err => console.error('[FontKit] All CDNs failed:', err));
-    } else {
-        // 极简降级方案：如果不支持 Promise.any，直接加载 jsdelivr (稳健)
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = urls[0]; // index 0 是 jsdelivr
-        document.head.appendChild(link);
-    }
-})();
-</script>
+<link rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer"
+      href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/fonts.min.css"
+      onerror="this.onerror=null;this.href='https://unpkg.com/@raineblog/mkdocs-fontkit@latest/dist/fonts.min.css';">
