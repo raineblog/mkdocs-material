@@ -246,11 +246,25 @@
     {% endblock %}
     {% block scripts %}
       <script src="{{ 'assets/javascripts/bundle.79ae519e.min.js' | url }}"></script>
-      <script src="{{ 'assets/javascripts/jquery.min.js' | url }}"></script>
       {% for script in config.extra_javascript %}
         {{ script | script_tag }}
       {% endfor %}
-      <script src="{{ 'assets/javascripts/export.js' | url }}"></script>
+      <script defer>
+        const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
+
+        if (exportParam === 'true') {
+            document$.subscribe(({ body }) => {
+                console.log("export");
+            });
+        }
+        else {
+            console.log("attempt to load giscus");
+            load_giscus();
+            document$.subscribe(({ body }) => {
+                console.log("not export");
+            });
+        }
+      </script>
     {% endblock %}
   </body>
 </html>
