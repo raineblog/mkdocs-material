@@ -18,6 +18,9 @@
       {% elif config.site_author %}
         <meta name="author" content="{{ config.site_author }}">
       {% endif %}
+      {% if config.extra.mastodon %}
+        <meta name="fediverse:creator" content="@{{ config.extra.mastodon }}@mastodon.social">
+      {% endif %}
       {% if page.canonical_url %}
         <link rel="canonical" href="{{ page.canonical_url }}">
       {% endif %}

@@ -2,10 +2,6 @@
   This file was automatically generated - do not edit
 -#}
 
-{% if config.extra.mastodon %}
-<meta name="fediverse:creator" content="@{{ config.extra.mastodon }}@mastodon.social">
-{% endif %}
-
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="dns-prefetch" href="https://unpkg.com">
 
@@ -17,4 +13,86 @@
       href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/custom.min.css"
       onerror="this.onerror=null;this.href='https://unpkg.com/@raineblog/mkdocs-fontkit@latest/dist/custom.min.css';">
 
-<link rel="stylesheet" href="{{ 'assets/stylesheets/custom.css' | url }}">
+<style>
+    :root {
+        --md-code-font: var(--fontkit-code-font);
+        --md-text-font: var(--fontkit-text-font);
+    }
+
+    * {
+        font-variant-ligatures: contextual;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .md-typeset div.arithmatex {
+        overflow: hidden !important;
+    }
+
+    .md-typeset div.arithmatex .katex-display {
+        margin-top: 0.1em !important;
+        margin-bottom: 0.1em !important;
+    }
+
+    .md-typeset__table {
+        display: block !important;
+    }
+
+    .md-typeset table:not(.highlighttable) {
+        display: table !important;
+    }
+
+    .md-typeset table:not([class]) th {
+        min-width: 0rem;
+    }
+
+    .recently-updated {
+        font-family: var(--md-text-font) !important;
+    }
+
+    h1 {
+        font-family: var(--fontkit-super-title), var(--fontkit-text-font);
+    }
+
+    h2, h3 {
+        text-align: center;
+    }
+
+    @media print {
+        .not-printable {
+            display: none !important;
+        }
+
+        code, pre {
+            white-space: pre-wrap;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .md-typeset .grid {
+            grid-template-columns: 1fr 1fr !important;
+        }
+
+        a {
+            text-decoration: underline !important;
+        }
+    }
+
+    no-wrap, .no-wrap {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+    }
+
+    .md-typeset .Box-body {
+        overflow: hidden !important;
+    }
+</style>
