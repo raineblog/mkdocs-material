@@ -18,9 +18,6 @@
       {% elif config.site_author %}
         <meta name="author" content="{{ config.site_author }}">
       {% endif %}
-      {% if config.extra.mastodon %}
-        <meta name="fediverse:creator" content="@{{ config.extra.mastodon }}@mastodon.social">
-      {% endif %}
       {% if page.canonical_url %}
         <link rel="canonical" href="{{ page.canonical_url }}">
       {% endif %}
@@ -247,22 +244,9 @@
       {% for script in config.extra_javascript %}
         {{ script | script_tag }}
       {% endfor %}
-      <script defer>
-        const exportParam = new URLSearchParams(location.search).get('export')?.toLowerCase();
-
-        if (exportParam === 'true') {
-            document$.subscribe(({ body }) => {
-                console.log("export");
-            });
-        }
-        else {
-            console.log("attempt to load giscus");
-            load_giscus();
-            document$.subscribe(({ body }) => {
-                console.log("not export");
-            });
-        }
-      </script>
+    {% endblock %}
+    {% block extrabody %}
+      {% include "partials/integrations/body.html" %}
     {% endblock %}
   </body>
 </html>
