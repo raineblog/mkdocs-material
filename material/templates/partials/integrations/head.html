@@ -1,20 +1,55 @@
 {#-
-  This file was automatically generated - do not edit
+This file was automatically generated - do not edit
 -#}
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="dns-prefetch" href="https://unpkg.com">
 
-<link rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer"
-      href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/fonts.min.css"
-      onerror="this.onerror=null;this.href='https://unpkg.com/@raineblog/mkdocs-fontkit@latest/dist/fonts.min.css';">
+<link rel="preload"
+    href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/fonts/google/c4mv1nF8G8_swA3J0Q.woff2"
+    as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer"
-      href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/custom.min.css"
-      onerror="this.onerror=null;this.href='https://unpkg.com/@raineblog/mkdocs-fontkit@latest/dist/custom.min.css';">
+<link rel="preload"
+    href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/fonts/offline/FZXSSJW/820629.woff2"
+    as="font" type="font/woff2" crossorigin>
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/fonts/KaTeX_Math-Italic.woff2" as="font"
+    type="font/woff2" crossorigin>
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/fonts/KaTeX_Main-Regular.woff2" as="font"
+    type="font/woff2" crossorigin>
+
+<style>
+    @font-face {
+        font-family: 'Aleo';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/fonts/google/c4mv1nF8G8_swA3J0Q.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@raineblog/mkdocs-fontkit@latest/dist/fonts.min.css"
+    media="print" onload="this.media='all'">
 
 <style>
     :root {
+        --fontkit-text-font: "Aleo", "FZNewShuSong",
+            "Zen Old Mincho", "Chiron Sung HK", "Noto Serif SC", serif;
+        --fontkit-code-font: "Fira Code",
+            "Cascadia Code", "Consolas", "Inconsolata",
+            "Menlo", "Monaco", "SF Mono", "Ubuntu Mono",
+            "DejaVu Sans Mono", "Courier New", monospace;
+        --fontkit-super-title: "lobster", "zhi-mang-xing";
+        --fontkit-cjk-cao: "liu-jian-mao-cao";
+        /* 草书个性字体 */
+        --fontkit-cjk-kai: "ma-shan-zheng";
+        /* 楷体个性字体 */
+        --fontkit-cjk-xing: "zhi-mang-xing";
+        /* 行书个性字体 */
+        --fontkit-handwrite: "playwrite-cc-gb-s";
+        /* 手写个性字体 */
+
         --md-code-font: var(--fontkit-code-font);
         --md-text-font: var(--fontkit-text-font);
     }
@@ -64,7 +99,8 @@
         font-family: var(--fontkit-super-title), var(--fontkit-text-font);
     }
 
-    h2, h3 {
+    h2,
+    h3 {
         text-align: center;
     }
 
@@ -73,7 +109,8 @@
             display: none !important;
         }
 
-        code, pre {
+        code,
+        pre {
             white-space: pre-wrap;
             overflow: hidden;
         }
@@ -91,7 +128,8 @@
         }
     }
 
-    no-wrap, .no-wrap {
+    no-wrap,
+    .no-wrap {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
